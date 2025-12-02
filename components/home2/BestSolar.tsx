@@ -1,12 +1,20 @@
 "use client";
-import arrow from "@/public/images/arrow-down.png";
-import bestSolar from "@/public/images/best-solar.webp";
+
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import ModalVideo from "react-modal-video";
+import dynamic from "next/dynamic";
+
+import arrow from "@/public/images/arrow-down.png";
+import bestSolar from "@/public/images/best-solar.webp";
+
+// SSR disable for react-modal-video
+const ModalVideo = dynamic(() => import("react-modal-video"), { ssr: false });
+import "react-modal-video/css/modal-video.css";
+
 const BestSolar = () => {
   const [open, setOpen] = useState(false);
+
   return (
     <section className="legal-partner">
       <a href="#services" className="scroll-banner d-none d-xxl-flex">
@@ -15,6 +23,7 @@ const BestSolar = () => {
           <Image src={arrow} alt="" />
         </div>
       </a>
+
       <div className="container px-0 position-relative">
         <div className="legal-content px-3">
           <div className="row">
@@ -34,6 +43,7 @@ const BestSolar = () => {
           </div>
         </div>
       </div>
+
       <div className="solar-video">
         <div className="container z-3">
           <div className="row">
@@ -41,7 +51,10 @@ const BestSolar = () => {
               <div className="reveal reveal--right reveal--overlay">
                 <div className="text-center position-relative">
                   <Image src={bestSolar} className="max-un" alt="" />
-                  <button onClick={() => setOpen(true)} className="play-btn unset popup-youtube">
+                  <button
+                    onClick={() => setOpen(true)}
+                    className="play-btn unset popup-youtube"
+                  >
                     <i className="ti ti-player-play-filled"></i>
                   </button>
                 </div>
@@ -50,7 +63,14 @@ const BestSolar = () => {
           </div>
         </div>
       </div>
-      <ModalVideo channel="youtube" youtube={{ mute: 0, autoplay: 0 }} isOpen={open} videoId="pBFQdxA-apI" onClose={() => setOpen(false)} />
+
+      <ModalVideo
+        channel="youtube"
+        youtube={{ mute: 0, autoplay: 0 }}
+        isOpen={open}
+        videoId="pBFQdxA-apI"
+        onClose={() => setOpen(false)}
+      />
     </section>
   );
 };
