@@ -1,14 +1,14 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
 import { useState } from "react";
 import dynamic from "next/dynamic";
+import Image from "next/image";
+import Link from "next/link";
 
 import arrow from "@/public/images/arrow-down.png";
 import bestSolar from "@/public/images/best-solar.webp";
 
-// SSR disable for react-modal-video
+// Dynamic import: SSR safe
 const ModalVideo = dynamic(() => import("react-modal-video"), { ssr: false });
 import "react-modal-video/css/modal-video.css";
 
@@ -17,13 +17,15 @@ const BestSolar = () => {
 
   return (
     <section className="legal-partner">
+      {/* Scroll Banner */}
       <a href="#services" className="scroll-banner d-none d-xxl-flex">
         <h3 className="vertical-sm-black">Discover</h3>
         <div className="arrow-down">
-          <Image src={arrow} alt="" />
+          <Image src={arrow} alt="Arrow Down" />
         </div>
       </a>
 
+      {/* Content Section */}
       <div className="container px-0 position-relative">
         <div className="legal-content px-3">
           <div className="row">
@@ -44,13 +46,14 @@ const BestSolar = () => {
         </div>
       </div>
 
+      {/* Video Section */}
       <div className="solar-video">
         <div className="container z-3">
           <div className="row">
             <div className="col-12 px-0">
               <div className="reveal reveal--right reveal--overlay">
                 <div className="text-center position-relative">
-                  <Image src={bestSolar} className="max-un" alt="" />
+                  <Image src={bestSolar} className="max-un" alt="Best Solar" />
                   <button
                     onClick={() => setOpen(true)}
                     className="play-btn unset popup-youtube"
@@ -64,6 +67,7 @@ const BestSolar = () => {
         </div>
       </div>
 
+      {/* Modal Video */}
       <ModalVideo
         channel="youtube"
         youtube={{ mute: 0, autoplay: 0 }}
