@@ -1,0 +1,453 @@
+.black-btn {
+  background-color: $bg2;
+  border-radius: 0;
+  padding: 14px 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  color: $primary !important;
+  border: 1px solid $n800;
+  position: relative;
+  overflow: hidden;
+  transition: 0.5s;
+  font-weight: 600;
+  z-index: 1;
+  &::before {
+    content: "";
+    width: 0;
+    height: 500%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    background: $primary;
+    transition: 0.5s ease;
+    display: block;
+    z-index: -1;
+  }
+  &:hover {
+    color: $n800 !important;
+    &::before {
+      width: 150%;
+    }
+  }
+}
+
+.outline-btn {
+  @extend .black-btn;
+  background-color: transparent;
+  padding: 0.8em 1.8em;
+  color: $secondary2 !important;
+  border: 1px solid $secondary2;
+  &.primary {
+    color: $primary !important;
+    border-color: $primary;
+    &:hover {
+      color: $bg2 !important;
+    }
+  }
+}
+
+.primary-btn {
+  @extend .black-btn;
+  padding: 10px 24px;
+  @include screen(md) {
+    padding: 14px 32px;
+  }
+  background-color: $primary;
+  &::before {
+    background: $n0;
+  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $n700 !important;
+  font-weight: 600;
+  border: 1px solid $primary;
+  max-width: fit-content;
+  gap: 8px;
+  i {
+    font-size: 1.3rem;
+  }
+  &:hover {
+    color: $secondary2 !important;
+    border-color: $secondary2;
+  }
+}
+.secondary3-btn {
+  @extend .primary-btn;
+  background-color: $secondary3;
+  border: 1px solid $secondary3;
+  color: $n0 !important;
+}
+.white-btn {
+  padding: 8px 16px;
+  background-color: $n0;
+  color: $bg2;
+  font-weight: 600;
+}
+
+.arrow-up {
+  height: 80px;
+  width: 80px;
+  @include screen(xl) {
+    height: 140px;
+    width: 140px;
+  }
+  background-color: $primary;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  color: $n700;
+  &:hover {
+    color: $n700;
+  }
+}
+.dir-rtl {
+  direction: rtl;
+}
+.max-un {
+  max-width: 100%;
+  @media (min-width: 1200px) {
+    max-width: unset;
+  }
+}
+
+.react-select {
+  border-radius: 0 !important;
+  background-color: #10271d0d !important;
+  color: $n50;
+  border: none;
+  width: 100%;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  border: 1px solid $n30;
+  &.focused{
+    outline: none;
+    box-shadow: none;
+    border-color: $n30;
+  }
+  .single-value{
+    font-size: 14px;   
+  }
+  &.sort {
+    .current {
+      color: $n500;
+    }
+    border: 1px solid $n300;
+    &::after {
+      border-color: $n500;
+      right: 12px;
+    }
+  }
+  &.n0{
+    background-color: $n0 !important;
+    border-color: $n0;
+  }
+}
+.react-select .react-select-dropdown {
+  background-color: black !important;
+  border-radius: 0;
+  box-shadow: 0 0 0 1px rgba(68, 68, 68, 0.11);
+  pointer-events: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  transform-origin: 50% 0;
+  transform: scale(0.75) translateY(19px);
+  transition: all 0.2s cubic-bezier(0.5, 0, 0, 1.25), opacity 0.15s ease-out;
+  z-index: 9;
+  opacity: 0;
+  width: 100%;
+  padding-bottom: 0;
+ 
+}
+.react-select .option:hover,
+.react-select .option.focus,
+.react-select .option.selected,
+.react-select .option.selected.focus {
+  background-color: $primary;
+  color: $n300;
+}
+.react-select .list {
+  border-radius: 0;
+  padding-bottom: 0;
+}
+.react-select .react-select-dropdown .list .option {
+  border-radius: 0;
+}
+
+.vertical {
+  display: none;
+  @include screen(xxl) {
+    display: block;
+  }
+  writing-mode: vertical-lr;
+  white-space: nowrap;
+  margin: 0;
+  font-size: 35px;
+  @include screen(xxl) {
+    font-size: 56px;
+  }
+  font-weight: 600;
+  transform: rotate(-180deg);
+  color: transparent; /* Fallback */
+  text-transform: uppercase;
+  -webkit-text-stroke: 1px $bg2;
+  opacity: 0.4;
+}
+.vertical-sm {
+  @extend .vertical;
+  text-transform: none;
+  position: relative;
+  z-index: 2;
+  font-size: 40px;
+  -webkit-text-stroke-width: 1;
+  -webkit-text-stroke-color: $bg2;
+}
+.vertical-white {
+  @extend .vertical;
+  opacity: 0.4;
+}
+.vertical-sm-black {
+  @extend .vertical-sm;
+  opacity: 0.5;
+  -webkit-text-stroke-width: 0.8px;
+  -webkit-text-stroke-color: $n800;
+}
+.arrow {
+  color: $primary;
+  width: 80px;
+  height: 80px;
+  @media (min-width: 1600px) {
+    width: 128px;
+    height: 128px;
+  }
+  border-radius: 100%;
+  border: 1px dashed rgba(232, 191, 150, 0.3);
+  font-size: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.line {
+  display: none;
+  @include screen(xxl) {
+    display: block;
+  }
+  width: 1px;
+  height: 100%;
+  position: absolute;
+  left: 5%;
+  @media (min-width: 1400px) {
+    left: 10%;
+  }
+  @media (min-width: 1700px) {
+    left: 17%;
+  }
+  top: 0;
+  z-index: 2;
+  background: rgba($color: $primary, $alpha: 0.1);
+  opacity: 1;
+  &::after {
+    content: "";
+    height: 70px;
+    width: 1px;
+    display: block;
+    left: 0;
+    top: 0;
+    position: absolute;
+    opacity: 1;
+    background: linear-gradient(to bottom, #9fd4561e, #9fd456, #9fd4562c);
+    animation: slideToBottom 14s linear infinite alternate;
+  }
+  &.two {
+    left: 34%;
+    &::after {
+      animation: slideToBottom 18s linear 1s infinite alternate;
+    }
+  }
+  &.three {
+    left: 65%;
+    &::after {
+      animation: slideToBottom 22s linear 300ms infinite alternate;
+    }
+  }
+  &.four {
+    left: 82%;
+    &::after {
+      animation: slideToBottom 28s linear 800ms infinite alternate;
+    }
+  }
+}
+.line-right {
+  @extend .line;
+  left: auto;
+  right: 5%;
+  @media (min-width: 1400px) {
+    right: 10%;
+  }
+  @media (min-width: 1700px) {
+    right: 13%;
+  }
+}
+@keyframes slideToBottom {
+  0% {
+    top: 0;
+  }
+  100% {
+    top: 88%;
+  }
+}
+// one side full width
+.left-col {
+  padding-left: 0 !important;
+}
+@include screen(sm) {
+  .left-col {
+    padding-left: calc((100% - 540px) / 2) !important;
+  }
+}
+@include screen(md) {
+  .left-col {
+    padding-left: calc((100% - 720px) / 2) !important;
+  }
+}
+@include screen(lg) {
+  .left-col {
+    padding-left: calc((100% - 960px) / 2) !important;
+  }
+}
+@include screen(xl) {
+  .left-col {
+    padding-left: calc((100% - 1140px) / 2) !important;
+  }
+}
+@include screen(xxl) {
+  .left-col {
+    padding-left: calc((100% - 1320px) / 2) !important;
+  }
+}
+
+// right side full
+.right-col {
+  padding-right: 0;
+}
+@include screen(sm) {
+  .right-col {
+    padding-right: calc((100% - 540px) / 2);
+  }
+}
+@include screen(md) {
+  .right-col {
+    padding-right: calc((100% - 720px) / 2);
+  }
+}
+@include screen(lg) {
+  .right-col {
+    padding-right: calc((100% - 960px) / 2);
+  }
+}
+@include screen(xl) {
+  .right-col {
+    padding-right: calc((100% - 1140px) / 2);
+  }
+}
+@include screen(xxl) {
+  .right-col {
+    padding-right: calc((100% - 1320px) / 2);
+  }
+}
+
+.pt-120 {
+  padding-top: 60px;
+  @media (min-width: 1200px) {
+    padding-top: 120px;
+  }
+}
+.pb-120 {
+  padding-bottom: 60px;
+  @media (min-width: 1200px) {
+    padding-bottom: 120px;
+  }
+}
+.pt-80 {
+  padding-top: 50px;
+  @media (min-width: 1200px) {
+    padding-top: 80px;
+  }
+}
+.pb-80 {
+  padding-bottom: 50px;
+  @media (min-width: 1200px) {
+    padding-bottom: 80px;
+  }
+}
+.container-big {
+  max-width: 1752px;
+  margin: 0 auto;
+  padding: 0 12px;
+}
+
+// back to top button
+.back-to-top {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 999;
+  background-color: $secondary2;
+  color: $n0;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  transition: 0.5s;
+  visibility: hidden;
+  transform: translateX(250px);
+  opacity: 0;
+  &.show {
+    transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+// animation
+.reveal {
+  visibility: hidden;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  &.reveal--overlay {
+    background-color: rgba($color: $bg2, $alpha: 0.4);
+  }
+}
+
+
+// solarox input
+.solarox-input {
+  font-size: 14px;
+  border: 1px solid rgba(16, 39, 29, 0.1);
+  background: rgba(16, 39, 29, 0.05);
+  padding: 12px;
+  @include screen(lg) {
+    padding: 12px 24px;
+  }
+  color: $n800;
+
+  &:focus {
+    outline: transparent;
+    box-shadow: none;
+  }
+  width: 100%;
+  &.bg1 {
+    background-color: $bg1;
+  }
+}
