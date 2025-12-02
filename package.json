@@ -11,6 +11,7 @@
   "dependencies": {
     "@types/react-modal-video": "^1.2.3",
     "@yaireo/ui-range": "^2.1.15",
+    "aos": "^2.3.4",
     "bootstrap": "^5.3.3",
     "fslightbox-react": "^1.7.6",
     "gsap": "^3.12.5",
@@ -19,6 +20,7 @@
     "react-animate-height": "^3.2.3",
     "react-countup": "^6.5.3",
     "react-dom": "^19.0.0",
+    "react-modal-video": "^2.0.2",
     "react-select": "^5.9.0",
     "swiper": "^11.1.15",
     "yet-another-react-lightbox": "^3.21.7"
