@@ -8,7 +8,7 @@ import projectDetailsVideo from "@/public/images/project-details-video.webp";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import ModalVideo from "react-modal-video";
+// import ModalVideo from "react-modal-video";
 const Details = () => {
   const [open, setOpen] = useState(false);
   return (
@@ -218,7 +218,7 @@ const Details = () => {
           </div>
         </div>
       </div>
-      <ModalVideo channel="youtube" youtube={{ mute: 0, autoplay: 0 }} isOpen={open} videoId="pBFQdxA-apI" onClose={() => setOpen(false)} />
+      {/* <ModalVideo channel="youtube" youtube={{ mute: 0, autoplay: 0 }} isOpen={open} videoId="pBFQdxA-apI" onClose={() => setOpen(false)} /> */}
     </section>
   );
 };
