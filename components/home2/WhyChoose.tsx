@@ -4,7 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import CountUp from "react-countup";
-import ModalVideo from "react-modal-video";
+import CommonModal from "../shared/CommonModal";
+// import ModalVideo from "react-modal-video";
 const WhyChoose = () => {
   const [open, setOpen] = useState(false);
   return (
@@ -82,7 +83,12 @@ const WhyChoose = () => {
           </div>
         </div>
       </div>
-      <ModalVideo channel="youtube" youtube={{ mute: 0, autoplay: 0 }} isOpen={open} videoId="pBFQdxA-apI" onClose={() => setOpen(false)} />
+      {/* <ModalVideo channel="youtube" youtube={{ mute: 0, autoplay: 0 }} isOpen={open} videoId="pBFQdxA-apI" onClose={() => setOpen(false)} /> */}
+      <CommonModal
+        open={open}
+        onClose={() => setOpen(false)}
+        videoId="LTsxOzNdbRQ"
+      />
     </section>
   );
 };

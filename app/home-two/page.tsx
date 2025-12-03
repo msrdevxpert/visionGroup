@@ -7,7 +7,7 @@ import SmartSolar from "@/components/home2/SmartSolar";
 import SolarInstall from "@/components/home2/SolarInstall";
 import Specialist from "@/components/home2/Specialist";
 import Testimonial from "@/components/home2/Testimonial";
-// import WhyChoose from "@/components/home2/WhyChoose";
+import WhyChoose from "@/components/home2/WhyChoose";
 
 const HomeTwo = () => {
   return (

@@ -7,7 +7,7 @@ import ProjectShowcase from "@/components/home4/ProjectShowcase";
 import Features from "@/components/home6/Features";
 import Hero from "@/components/home6/Hero";
 import Navbar from "@/components/home6/Navbar";
-// import Testimonial from "@/components/home6/Testimonial";
+import Testimonial from "@/components/home6/Testimonial";
 import faqbg6 from "@/public/images/faq-bg-6.webp";
 const HomeSix = () => {
   return (

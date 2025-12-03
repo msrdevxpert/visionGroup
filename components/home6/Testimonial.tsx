@@ -5,12 +5,13 @@ import client3 from "@/public/images/client-3.png";
 import quote from "@/public/images/quote-2.png";
 import testimonialBg6 from "@/public/images/testimonial-bg-6.webp";
 import Image from "next/image";
-// import { useState } from "react";
+import { useState } from "react";
 // import ModalVideo from "react-modal-video";
 import { Autoplay, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import CommonModal from "../shared/CommonModal";
 const Testimonial = () => {
-  // const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false);
   return (
     <section className="testimonial-6 pt-120 pb-120">
       <div className="container">
@@ -94,7 +95,7 @@ const Testimonial = () => {
           </div>
           <div className="col-lg-6">
             <div className="image">
-              <button  className="play-btn popup-youtube">
+              <button onClick={()=> setOpen(true)}  className="play-btn popup-youtube">
                 <i className="ti ti-player-play-filled"></i>
               </button>
               <Image src={testimonialBg6} className="img-fluid" alt="" />
@@ -102,7 +103,11 @@ const Testimonial = () => {
           </div>
         </div>
       </div>
-      {/* <ModalVideo channel="youtube" youtube={{ mute: 0, autoplay: 0 }} isOpen={open} videoId="pBFQdxA-apI" onClose={() => setOpen(false)} /> */}
+      <CommonModal
+        open={open}
+        onClose={() => setOpen(false)}
+        videoId="LTsxOzNdbRQ"
+      />
     </section>
   );
 };

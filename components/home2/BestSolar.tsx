@@ -4,8 +4,8 @@ import bestSolar from "@/public/images/best-solar.webp";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import Modal from "@mui/material/Modal";
-import YouTube from "react-youtube";
+import CommonModal from "../shared/CommonModal"
+
 
 const BestSolar = () => {
   const [open, setOpen] = useState(false);
@@ -52,47 +52,11 @@ const BestSolar = () => {
           </div>
         </div>
       </div>
-   <Modal open={open} onClose={() => setOpen(false)}>
-        <div
-          style={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            background: "#000",
-            padding: "0",
-            outline: "none",
-            borderRadius: "8px",
-          }}
-        >
-          {/* Close Button */}
-          <button
-            onClick={() => setOpen(false)}
-            style={{
-              position: "absolute",
-              top: "-40px",
-              right: "0",
-              background: "transparent",
-              border: "none",
-              fontSize: "32px",
-              color: "#fff",
-              cursor: "pointer",
-            }}
-          >
-            ×
-          </button>
-
-          {/* YouTube Video */}
-          <YouTube
-            videoId="LTsxOzNdbRQ"
-            opts={{
-              width: "900",
-              height: "500",
-              playerVars: { autoplay: 1 },
-            }}
-          />
-        </div>
-      </Modal>
+   <CommonModal
+        open={open}
+        onClose={() => setOpen(false)}
+        videoId="LTsxOzNdbRQ"
+      />
 
     </section>
   );
