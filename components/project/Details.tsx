@@ -7,10 +7,10 @@ import projectDetails1 from "@/public/images/project-details-1.webp";
 import projectDetailsVideo from "@/public/images/project-details-video.webp";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+// import { useState } from "react";
 // import ModalVideo from "react-modal-video";
 const Details = () => {
-  const [open, setOpen] = useState(false);
+  // const [open, setOpen] = useState(false);
   return (
     <section className="project-details pt-80 pb-80 z-3 position-relative">
       <div className="container">
@@ -56,7 +56,7 @@ const Details = () => {
                   <div className="reveal reveal--right reveal--overlay overflow-hidden">
                     <Image src={projectDetailsVideo} className="img-fluid" alt="" />
                   </div>
-                  <button onClick={() => setOpen(true)} className="play-btn bg-primary popup-youtube">
+                  <button className="play-btn bg-primary popup-youtube">
                     <i className="ti ti-player-play-filled text-bg2 fs-4"></i>
                   </button>
                 </div>
