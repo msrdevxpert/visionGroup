@@ -1,6 +1,6 @@
 import Specialist from "@/components/home2/Specialist";
 import Banner from "@/components/home4/Banner";
-import Counter from "@/components/home4/Counter";
+// import Counter from "@/components/home4/Counter";
 import Faq from "@/components/home4/Faq";
 import Footer from "@/components/home4/Footer";
 import News from "@/components/home4/News";
@@ -15,7 +15,7 @@ const HomeFour = () => {
       <Navbar />
       <Banner />
       <Services />
-      <Counter />
+      {/* <Counter /> */}
       <ProjectShowcase />
       <Testimonial />
       <Specialist />
