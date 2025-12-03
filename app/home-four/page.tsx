@@ -15,7 +15,7 @@ const HomeFour = () => {
       <Navbar />
       <Banner />
       <Services />
-      {/* <Counter /> */}
+      <Counter />
       <ProjectShowcase />
       <Testimonial />
       <Specialist />

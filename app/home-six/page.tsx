@@ -18,7 +18,7 @@ const HomeSix = () => {
       <Features />
       <ProjectShowcase />
       <Specialist />
-      {/* <Testimonial /> */}
+      <Testimonial />
       <Faq faqImg={faqbg6} />
       <News />
       <Footer />

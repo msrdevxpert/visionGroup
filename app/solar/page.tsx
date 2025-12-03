@@ -20,7 +20,7 @@ const HomeTwo = () => {
       <BestSolar />
       <SolarInstall />
       <SmartSolar />
-      {/* <WhyChoose /> */}
+      <WhyChoose />
       <Specialist />
       <Testimonial />
       <Faq />
