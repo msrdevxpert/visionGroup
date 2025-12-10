@@ -117,7 +117,13 @@ const Navbar = () => {
 
       <Search search={search} setSearch={setSearch} />
       <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-      <MobileMenu mobileMenu={mobileMenu} setMobileMenu={setMobileMenu} />
+      <MobileMenu
+  mobileMenu={mobileMenu}
+  setMobileMenu={setMobileMenu}
+  navbarData={navbarData}          // ✅ REQUIRED
+  logo={logoBlack.src}             // optional, if your MobileMenu uses it
+/>
+
     </>
   );
 };
