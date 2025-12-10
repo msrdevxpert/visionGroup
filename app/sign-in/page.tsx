@@ -48,6 +48,7 @@ const handleLogin = async (e: React.FormEvent) => {
     setLoading(false);
     router.push("/admin");
   } catch (error) {
+    console.log(error);
     setErrorMsg("Something went wrong. Please try again.");
     setLoading(false);
   }

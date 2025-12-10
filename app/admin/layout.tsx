@@ -19,7 +19,7 @@ export default function AdminLayout({
       try {
        const user = JSON.parse(localStorage.getItem("authLogin") || "{}");
          setFullName(user.fullName || "");
-      } catch (err) {
+      } catch (error) {
         console.error("Invalid authLogin JSON");
       }
     }

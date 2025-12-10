@@ -6,9 +6,15 @@ import { useEffect, useState } from "react";
 import { Autoplay, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-const SolarInstall = () => {
+type Story = {
+  id: number;
+  image: string;
+  title: string;
+  description: string;
+};
 
-    const [stories, setStories] = useState([]);
+const SolarInstall = () => {
+  const [stories, setStories] = useState<Story[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -35,8 +41,6 @@ const SolarInstall = () => {
     );
   }
 
-
-
   return (
     <section className="success-story z-3" id="services">
       <div className="container">
@@ -59,6 +63,7 @@ const SolarInstall = () => {
           </div>
         </div>
       </div>
+
       <div className="container-fluid px-0">
         <Swiper
           navigation={{
@@ -70,22 +75,10 @@ const SolarInstall = () => {
           centeredSlides
           modules={[Navigation, Autoplay]}
           breakpoints={{
-            768: {
-              slidesPerView: 1.4,
-              spaceBetween: 16,
-            },
-            1200: {
-              slidesPerView: 1.6,
-              spaceBetween: 24,
-            },
-            1350: {
-              slidesPerView: 2,
-              spaceBetween: 24,
-            },
-            1500: {
-              slidesPerView: 2.2,
-              spaceBetween: 24,
-            },
+            768: { slidesPerView: 1.4, spaceBetween: 16 },
+            1200: { slidesPerView: 1.6, spaceBetween: 24 },
+            1350: { slidesPerView: 2, spaceBetween: 24 },
+            1500: { slidesPerView: 2.2, spaceBetween: 24 },
           }}
           className="swiper"
         >
