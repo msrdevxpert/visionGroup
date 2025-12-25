@@ -9,9 +9,10 @@ type Blog = {
   time: string;
   title: string;
   description: string;
+  slug?: string;
 };
 
-const BlogStandardCard = ({ id, alt, author, date, description, imageSrc, time, title }: Blog) => {
+const BlogStandardCard = ({ id, alt, author, date, description, imageSrc, time, title, slug }: Blog) => {
   return (
     <div className="blog-standard">
       <div className="reveal reveal--right reveal--overlay overflow-hidden">
@@ -33,6 +34,7 @@ const BlogStandardCard = ({ id, alt, author, date, description, imageSrc, time, 
         </ul>
         <h3 className="mt-2 mb-3">{title}</h3>
         <p>{description}</p>
+        <p>{slug}</p>
         <Link href={`/blogs/${id}`} className="outline-btn d-inline-flex align-items-center gap-2">
           Read More <i className="ti ti-arrow-up-right fs-5"></i>
         </Link>

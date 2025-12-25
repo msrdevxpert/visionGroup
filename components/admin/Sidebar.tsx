@@ -10,6 +10,9 @@ export default function Sidebar() {
     { name: "Dashboard", path: "/admin" },
     { name: "Users", path: "/admin/users" },
     { name: "Settings", path: "/admin/settings" },
+    { name: "Projects", path: "/admin/projects" },
+    { name: "Services", path: "/admin/services" },
+    { name: "Team", path: "/admin/team" },
   ];
 
   return (

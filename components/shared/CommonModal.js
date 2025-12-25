@@ -5,7 +5,7 @@ import Modal from "@mui/material/Modal";
 import { IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import Youtube from "react-youtube";
-const CommonModal = ({ open, onClose, videoId }) => {
+const CommonModal = ({ open, onClose, videoId, local, url }) => {
   // Prevent background scroll when modal opens
   console.log(videoId);
   
@@ -46,7 +46,14 @@ const CommonModal = ({ open, onClose, videoId }) => {
         </IconButton>
 
         {/* YouTube Video */}
-       <Youtube videoId={videoId} />
+       {local === "Y" ? <video
+       style={{maxWidth:"100%"}}
+    src={url}
+    autoPlay
+    controls
+    playsInline
+    className="max-un"
+  />:<Youtube videoId={videoId} />}
 
       </div>
     </Modal>

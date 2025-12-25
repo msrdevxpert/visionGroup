@@ -10,15 +10,21 @@ export async function generateStaticParams() {
   }));
 }
 
-const page = () => {
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ id: string }>; // 🔥 IMPORTANT
+}) {
+  const { id } = await params; // ✅ MUST AWAIT
+
   return (
     <>
-    <Navbar />
-      <Banner title="Services" bgImage="service-details-hero-bg.webp" />
-      <Details />
+      <Navbar />
+      <Banner title="Services" bgImage="AgricultureServiceBanner.jpg" />
+
+      <Details id={id} type="agri" />
+
       <BrandSlider />
     </>
   );
-};
-
-export default page;
+}

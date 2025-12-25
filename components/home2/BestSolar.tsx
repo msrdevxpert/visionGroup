@@ -1,6 +1,6 @@
 "use client";
 import arrow from "@/public/images/arrow-down.png";
-import bestSolar from "@/public/images/best-solar.webp";
+import bestSolar from "@/public/images/SolarDiscoverThumbnail.png";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -56,6 +56,8 @@ const BestSolar = () => {
         open={open}
         onClose={() => setOpen(false)}
         videoId="LTsxOzNdbRQ"
+        local="Y"
+        url="/images/SolarDiscover.mp4"
       />
 
     </section>

@@ -3,7 +3,7 @@ import client1 from "@/public/images/client-1.png";
 import logoBlack from "@/public/images/visionGroupLogo.png";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 const SignInPage = () => {
@@ -14,7 +14,32 @@ const SignInPage = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+const [testimonial, setTestimonial] = useState<any>(null);
+const [tLoading, setTLoading] = useState(false);
+useEffect(() => {
+  const fetchTestimonials = async () => {
+    try {
+      setTLoading(true);
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/testimonials`
+      );
 
+      const data = await res.json();
+
+      if (res.ok && data?.status === "success" && Array.isArray(data?.data)) {
+        // pick first active
+        const active = data.data.filter((t: any) => t.isActive);
+        setTestimonial(active?.[0] || data.data?.[0]);
+      }
+    } catch (e) {
+      console.log("testimonial fetch error", e);
+    } finally {
+      setTLoading(false);
+    }
+  };
+
+  fetchTestimonials();
+}, []);
 const handleLogin = async (e: React.FormEvent) => {
   e.preventDefault();
   setErrorMsg("");
@@ -22,7 +47,7 @@ const handleLogin = async (e: React.FormEvent) => {
 
   try {
     const res = await fetch(
-      "https://visiongreen-production.up.railway.app/api/v1/auth/login",
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/login`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -155,26 +180,48 @@ const handleLogin = async (e: React.FormEvent) => {
             </form>
 
             <div className="d-none d-xl-flex col-lg-6 offset-xxl-1 flex-column align-items-end justify-content-end">
-              <div className="testimonial-card signup mb-3">
-                <Image width="60" height="60" src={client1} className="mb-3" alt="" />
-                <p className="mb-3 mb-xl-4">
-                  I had the privilege of working with Solarox from Solarox on a
-                  complex business litigation case.
-                </p>
-                <div className="text-yellow d-flex gap-2 stars mb-2 pb-1">
-                  <i className="ti ti-star-filled"></i>
-                  <i className="ti ti-star-filled"></i>
-                  <i className="ti ti-star-filled"></i>
-                  <i className="ti ti-star-filled"></i>
-                  <i className="ti ti-star-half-filled"></i>
-                </div>
-                <div className="d-flex gap-3 align-items-center">
-                  <div>
-                    <h5 className="mb-1">Kende Attila</h5>
-                    <span>Software Tester</span>
-                  </div>
-                </div>
-              </div>
+             <div className="testimonial-card signup mb-3">
+
+  {/* Avatar */}
+  {testimonial?.photoUrl ? (
+    <Image
+      width={60}
+      height={60}
+      src={testimonial.photoUrl}
+      className="mb-3 rounded-circle"
+      alt={testimonial.customerName}
+    />
+  ) : (
+    <Image width={60} height={60} src={client1} className="mb-3" alt="" />
+  )}
+
+  {/* Message */}
+  <p className="mb-3 mb-xl-4">
+    {tLoading
+      ? "Loading testimonial..."
+      : testimonial?.message || "Great service experience!"}
+  </p>
+
+  {/* Stars */}
+  <div className="text-yellow d-flex gap-2 stars mb-2 pb-1">
+    {Array.from({ length: testimonial?.rating || 5 }).map((_, i) => (
+      <i key={i} className="ti ti-star-filled"></i>
+    ))}
+  </div>
+
+  {/* Name + designation */}
+  <div className="d-flex gap-3 align-items-center">
+    <div>
+      <h5 className="mb-1">
+        {testimonial?.customerName || "Customer"}
+      </h5>
+      <span>
+        {testimonial?.designation || ""}
+      </span>
+    </div>
+  </div>
+</div>
+
             </div>
 
           </div>

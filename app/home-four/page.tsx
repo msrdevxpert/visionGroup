@@ -16,7 +16,7 @@ const HomeFour = () => {
       <Banner />
       <Services />
       <Counter />
-      <ProjectShowcase />
+      <ProjectShowcase type="agri"/>
       <Testimonial />
       <Specialist />
       <Faq />

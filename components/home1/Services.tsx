@@ -1,46 +1,50 @@
 "use client";
-import service1 from "@/public/images/service-1.png";
-import service2 from "@/public/images/service-2.png";
-import service3 from "@/public/images/service-3.png";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { Autoplay, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-const servicesData = [
-  {
-    id: 1,
-    image: service1,
-    title: "Solar Panel Installation",
-    description: "Professional installation services to ensure your solar panels operate",
-  },
-  {
-    id: 2,
-    image: service2,
-    title: "Maintenance & Repairs",
-    description: "Comprehensive maintenance and fast repair services to keep your solar system",
-  },
-  {
-    id: 3,
-    image: service3,
-    title: "Residential Solar Systems",
-    description: "Scalable solar energy systems for businesses, reducing costs",
-  },
-  {
-    id: 4,
-    image: service2,
-    title: "Maintenance & Repairs",
-    description: "Comprehensive maintenance and fast repair services to keep your solar system",
-  },
-  {
-    id: 5,
-    image: service3,
-    title: "Residential Solar Systems",
-    description: "Scalable solar energy systems for businesses, reducing costs",
-  },
-];
+// API Response Type
+type ServiceItem = {
+  id: string;
+  name: string;
+  type: string;
+  title: string;
+  description: string;
+  mediaUrl: string;
+};
 
 const Services = () => {
+  const [services, setServices] = useState<ServiceItem[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadServices = async () => {
+      try {
+        // You can dynamically change type + name
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/unified/all-services`
+        );
+
+        const json = await res.json();
+
+        if (json?.data?.length) {
+          setServices(json.data);
+        } else {
+          setServices([]);
+        }
+      } catch (err) {
+        console.error("Service API error:", err);
+        setServices([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadServices();
+  }, []);
+
   return (
     <section className="services" id="services">
       <div className="left-text d-none d-xl-block">
@@ -48,13 +52,16 @@ const Services = () => {
       </div>
 
       <div className="container">
+
+        {/* SECTION TITLE */}
         <div className="row align-items-end g-3 gx-xl-4 section-title">
           <div className="col-lg-6">
             <h2 className="mb-3 fade_up_anim">Solar Expertise You Can Trust</h2>
             <p className="fade_up_anim" data-delay=".3">
-              Discover a comprehensive range of solar energy services designed to meet your unique needs. From initial consultations to installation
+              Discover a comprehensive range of solar energy services designed to meet your needs.
             </p>
           </div>
+
           <div className="col-lg-6 d-flex justify-content-end">
             <div className="btns">
               <button className="service-prev">
@@ -66,51 +73,71 @@ const Services = () => {
             </div>
           </div>
         </div>
-        <Swiper
-          navigation={{
-            nextEl: ".service-next",
-            prevEl: ".service-prev",
-          }}
-          loop={true}
-          autoplay={true}
-          modules={[Navigation, Autoplay]}
-          breakpoints={{
-            320: {
-              slidesPerView: 1,
-            },
-            768: {
-              slidesPerView: 2,
-              spaceBetween: 24,
-            },
-            1200: {
-              slidesPerView: 3,
-              spaceBetween: 24,
-            },
-          }}
-          className="swiper ServiceSwiper"
-        >
-          {servicesData.map((service) => (
-            <SwiperSlide key={service.id}>
-              <div className="service-card">
-                <Image src={service.image} alt="" />
-                <h4>{service.title}</h4>
-                <p>{service.description}</p>
-                <span className="hr-line"></span>
-                <div className="d-flex align-items-center gap-3">
-                  <div className="readmore">
-                    <Link href={`/services/${service.id}`} className="fw-semibold">
-                      Read More
+
+        {/* LOADING */}
+        {loading && <p className="text-center text-white">Loading services...</p>}
+
+        {/* EMPTY */}
+        {!loading && services.length === 0 && (
+          <p className="text-center text-white">No services available</p>
+        )}
+
+        {/* SWIPER */}
+        {!loading && services.length > 0 && (
+          <Swiper
+            navigation={{
+              nextEl: ".service-next",
+              prevEl: ".service-prev",
+            }}
+            loop={true}
+            autoplay={true}
+            modules={[Navigation, Autoplay]}
+            breakpoints={{
+              320: { slidesPerView: 1 },
+              768: { slidesPerView: 2, spaceBetween: 24 },
+              1200: { slidesPerView: 3, spaceBetween: 24 },
+            }}
+            className="swiper ServiceSwiper"
+          >
+            {services.map((service) => (
+              <SwiperSlide key={service.id}>
+                <div className="service-card">
+                  <Image
+                    src={service.mediaUrl}
+                    alt={service.title}
+                    width={300}
+                    height={200}
+                  />
+
+                  <h4>{service.title}</h4>
+                  <p>{service.description}</p>
+
+                  <span className="hr-line"></span>
+
+                  <div className="d-flex align-items-center gap-3">
+                    <div className="readmore">
+                      <Link
+                        href={`/services/${service.id}`}
+                        className="fw-semibold"
+                      >
+                        Read More
+                      </Link>
+                      <span className="hr-black"></span>
+                    </div>
+
+                    <Link
+                      href={`/services/${service.id}`}
+                      className="arrow-sm secondary"
+                    >
+                      <i className="ti ti-arrow-up-right"></i>
                     </Link>
-                    <span className="hr-black"></span>
                   </div>
-                  <Link href={`/services/${service.id}`} className="arrow-sm secondary">
-                    <i className="ti ti-arrow-up-right"></i>
-                  </Link>
                 </div>
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        )}
+
       </div>
     </section>
   );

@@ -14,7 +14,7 @@ const BlogDetailsPage = () => {
   return (
     <>
     <Navbar />
-      <Banner title="Blog Details" bgImage="blog-details-hero-bg.webp" />
+      <Banner title="Blog Details" bgImage="CivilBlogBanner.jpg" />
       <Details />
       <BrandSlider />
     </>

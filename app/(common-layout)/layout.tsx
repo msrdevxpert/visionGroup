@@ -1,4 +1,4 @@
-import Footer from "@/components/home3/Footer";
+import Footer from "@/components/home2/Footer";
 
 
 export default function CommonLayout({

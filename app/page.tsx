@@ -25,9 +25,9 @@ export default function Home() {
       <WhyChoose />
       <RecentProject />
       <Experts />
-      <Testimonial />
+      <Testimonial bgImage="/images/imageTestomonials.png"/>
       <Client />
-      <Faq />
+      <Faq faqImg="/images/VisionGroupFAQBG.png" type="main"/>
       <Footer />
     </>
   );

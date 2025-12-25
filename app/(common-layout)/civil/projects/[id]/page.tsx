@@ -10,15 +10,22 @@ export async function generateStaticParams() {
   }));
 }
 
-const ProjectDetailsPage = () => {
+export default async function ProjectDetailsPage({
+  params,
+}: {
+  params: Promise<{ id: string }>; // 🔥 params async
+}) {
+  const { id } = await params; // ✅ MUST await
+const url = "/images/CivilProject.mp4";
   return (
     <>
-    <Navbar />
-      <Banner title="Project Details" bgImage="project-hero-bg.webp" />
-      <Details />
+      <Navbar />
+      <Banner title="Project Details" bgImage="CivilProjectBanner.jpg" />
+
+      {/* ✅ pass id */}
+      <Details id={id} type="civil" url={url}/>
+
       <BrandSlider />
     </>
   );
-};
-
-export default ProjectDetailsPage;
+}

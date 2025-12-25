@@ -10,9 +10,7 @@ import Specialist from "@/components/home2/Specialist";
 import Testimonial from "@/components/home2/Testimonial";
 import WhyChoose from "@/components/home2/WhyChoose";
 
-
 const HomeTwo = () => {
-
   return (
     <>
       <Navbar />
@@ -20,7 +18,10 @@ const HomeTwo = () => {
       <BestSolar />
       <SolarInstall />
       <SmartSolar />
-      <WhyChoose />
+
+      {/* 👇 type passed here */}
+      <WhyChoose type="SOLAR" />
+
       <Specialist />
       <Testimonial />
       <Faq />

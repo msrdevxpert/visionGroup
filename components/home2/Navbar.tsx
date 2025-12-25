@@ -16,6 +16,9 @@ import home3 from "@/public/images/home-333.png";
 import home4 from "@/public/images/agri_1.png";
 
 import home6 from "@/public/images/civil_1.png";
+import Modal from "../shared/Modal";
+import QuoteForm from "../quote/quote";
+import Sidebar from "../shared/Sidebar";
 
 const Navbar = () => {
 
@@ -36,12 +39,12 @@ const navbarData = [
       //   link: "/solar/",
       //   img: home2,
       // },
-      {
-        id: 1.3,
-        title: "MSR DevXpert",
-        link: "https://msrdevxpert.com/",
-        img: home3,
-      },
+      // {
+      //   id: 1.3,
+      //   title: "MSR DevXpert",
+      //   link: "https://msrdevxpert.com/",
+      //   img: home3,
+      // },
       {
         id: 1.4,
         title: "VISION AGRIFUTUREPRIVATE LIMITED",
@@ -60,6 +63,12 @@ const navbarData = [
         link: "/civil/",
         img: home6,
       },
+      {
+          id: 1.3,
+          title: "MSR DevXpert",
+          link: "https://msrdevxpert.com/",
+          img: home3,
+        },
     ],
     type: "megamenu",
   },
@@ -75,13 +84,13 @@ const navbarData = [
       {
         id: 3.1,
         title: "Services",
-        link: "/solar/servicessolar/",
+        link: "/solar/services/",
       },
-      {
-        id: 3.2,
-        title: "Service Details",
-        link: "/solar/servicessolar/1/",
-      },
+      // {
+      //   id: 3.2,
+      //   title: "Service Details",
+      //   link: "/solar/services/1/",
+      // },
     ],
   },
   {
@@ -91,23 +100,23 @@ const navbarData = [
       {
         id: 4.1,
         title: "Blog Standard",
-        link: "/solar/blogssolar/",
+        link: "/solar/blogs/",
       },
       {
         id: 4.2,
         title: "Blog Grid",
-        link: "/solar/blog-gridsolar/",
+        link: "/solar/blog-grid/",
       },
-      {
-        id: 4.3,
-        title: "Blog List",
-        link: "/solar/blog-listsolar/",
-      },
-      {
-        id: 4.4,
-        title: "Blog Details",
-        link: "/solar/blogssolar/1/",
-      },
+      // {
+      //   id: 4.3,
+      //   title: "Blog List",
+      //   link: "/solar/blog-list/",
+      // },
+      // {
+      //   id: 4.4,
+      //   title: "Blog Details",
+      //   link: "/solar/blogs/1/",
+      // },
     ],
   },
   // {
@@ -148,46 +157,57 @@ const navbarData = [
       {
         id: 6.1,
         title: "Projects",
-        link: "/solar/projectssolar/",
+        link: "/solar/projects/",
       },
-      {
-        id: 6.2,
-        title: "Project Details",
-        link: "/solar/projectssolar/1/",
-      },
-      {
-        id: 6.3,
-        title: "Contact",
-        link: "/solar/contactsolar/",
-      },
+      // {
+      //   id: 6.2,
+      //   title: "Project Details",
+      //   link: "/solar/projects/1/",
+      // },
+        {
+          id: 6.3,
+          title: "Certification",
+          link: "/solar/certificate",
+        },
       {
         id: 6.4,
-        title: "Faq",
-        link: "/solar/faqsolar/",
+        title: "Contact",
+        link: "/solar/contact/",
       },
       {
         id: 6.5,
-        title: "Sign Up",
-        link: "/sign-up/",
+        title: "Faq",
+        link: "/solar/faq/",
       },
+      // {
+      //   id: 6.6,
+      //   title: "Sign Up",
+      //   link: "/sign-up/",
+      // },
       {
-        id: 6.6,
+        id: 6.7,
         title: "Sign In",
         link: "/sign-in/",
       },
-      {
-        id: 6.7,
-        title: "404",
-        link: "/404/",
-      },
+      // {
+      //   id: 6.8,
+      //   title: "404",
+      //   link: "/404/",
+      // },
     ],
   },
+  {
+      id: 7,
+      title: "Careers",
+      link: "/solar/careers/",
+    },
 ];
 
 
 
 
   const [fixedHeader, setFixedHeader] = useState(false);
+    const [sidebarOpen, setSidebarOpen] = useState(false);
   const [search, setSearch] = useState(false);
   const [mobileMenu, setMobileMenu] = useState(false);
 
@@ -335,10 +355,17 @@ console.log("path",cleanedPath);
               <button onClick={() => setSearch(true)} className="search-popup-btn text-white xl-text">
                 <i className="ti ti-search"></i>
               </button>
-              <Cart />
-              <Link href="/contact-us" className="primary-btn d-none d-lg-block">
-                Get a Quote <i className="ti ti-arrow-up-right"></i>
-              </Link>
+              {/* <Cart /> */}
+               <button
+  className="primary-btn d-none d-lg-block"
+  data-bs-toggle="modal"
+  data-bs-target="#quoteModal"
+>
+  Get a Quote <i className="ti ti-arrow-up-right"></i>
+</button>
+              <button onClick={() => setSidebarOpen(true)} className="show-offcanvas bg-transparent border-0 d-none d-xl-block fs-3">
+                  <i className="ti ti-layout-grid"></i>
+                </button>
               <div className="toggle-menu" onClick={() => setMobileMenu(true)}>
                 <i className="ti ti-menu-2"></i>
               </div>
@@ -347,7 +374,11 @@ console.log("path",cleanedPath);
         </div>
       </header>
       <Search search={search} setSearch={setSearch} />
+      <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen}  logo={logo} />
       <MobileMenu mobileMenu={mobileMenu} setMobileMenu={setMobileMenu} navbarData={navbarData} logo={logo} />
+       <Modal id="quoteModal" title="Request a Quote">
+  <QuoteForm isModal />
+</Modal>
     </>
   );
 };

@@ -9,7 +9,7 @@ const page = () => {
   return (
     <>
     <Navbar />
-      <Banner title="Faq" bgImage="faq-hero-bg.webp" />
+      <Banner title="Faq" bgImage="AgricultureFAQBanner.jpg" />
       <Faqs />
       <WhyChoose />
       <Experts />

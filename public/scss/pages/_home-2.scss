@@ -613,6 +613,15 @@
       }
     }
   }
+  .logo-slider-4 {
+    background-color: $bg1;
+    img {
+      padding: 20px;
+      @include screen(lg) {
+        padding: 10px 20px;
+      }
+    }
+  }
   .faq-content {
     background-color: $n0;
     padding: 16px;
@@ -646,3 +655,8 @@
   }
 }
 
+// ..........................
+.img-fluidd{
+  max-width: 800px;
+  height: 400px;
+}

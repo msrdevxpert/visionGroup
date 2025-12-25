@@ -577,7 +577,7 @@
   @include screen(xl) {
     padding: 120px 0;
   }
-  background-image: url(/images/recent-bg-1.webp);
+  background-image: url(/images/MainHomeProjectbg.jpg);
   background-repeat: no-repeat;
   background-position: top left;
   .right-text{
@@ -736,7 +736,8 @@
 .testimonial {
   background-color: $n0;
   position: relative;
-  background-image: url(/images/client-bg-1.webp);
+  // background-image: url(/images/imageTestomonials.png);
+  background-image: var(--testimonial-bg);
   background-position: right;
   background-repeat: no-repeat;
   background-size: contain;
@@ -851,7 +852,10 @@
   padding: 60px 0;
   @include screen(xl) {
     padding: 120px 0;
-    background-image: url(/images/faq-bg-1.webp);
+    // background-image: url(/images/faq-bg-1.webp);
+    background-image: var(--faq-bg);
+    background-position: left top;  // position more precisely
+  background-size: auto 100%;  
   }
   &.faq-home {
     @include screen(xl) {

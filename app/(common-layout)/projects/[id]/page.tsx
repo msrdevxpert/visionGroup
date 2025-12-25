@@ -1,22 +1,24 @@
 import Details from "@/components/project/Details";
 import Banner from "@/components/shared/Banner";
 import BrandSlider from "@/components/shared/BrandSlider";
-import projects from "@/public/data/projects";
+import Navbar from "@/components/shared/Navbar";
 
-export async function generateStaticParams() {
-  return projects.map(({ id }) => ({
-    id: id.toString(),
-  }));
-}
-
-const ProjectDetailsPage = () => {
+export default async function ProjectDetailsPage({
+  params,
+}: {
+  params: Promise<{ id: string }>; // 🔥 params is Promise
+}) {
+  const { id } = await params; // ✅ MUST await
+const url = "/images/ProjectForAgri.mp4";
   return (
     <>
-      <Banner title="Project Details" bgImage="project-hero-bg.webp" />
-      <Details />
+      <Navbar />
+      <Banner title="Project Details" bgImage="VisonGroupProjectIdBanner.jpg" />
+
+      {/* ✅ pass awaited id */}
+      <Details id={id} type="main" url={url} />
+
       <BrandSlider />
     </>
   );
-};
-
-export default ProjectDetailsPage;
+}

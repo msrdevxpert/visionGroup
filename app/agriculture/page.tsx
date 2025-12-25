@@ -1,4 +1,4 @@
-import Specialist from "@/components/home2/Specialist";
+import Experts from "@/components/home4/Experts";
 import Banner from "@/components/home4/Banner";
 import Counter from "@/components/home4/Counter";
 import Faq from "@/components/home4/Faq";
@@ -16,10 +16,10 @@ const HomeFour = () => {
       <Banner />
       <Services />
       <Counter />
-      <ProjectShowcase />
+      <ProjectShowcase type="agri"/>
       <Testimonial />
-      <Specialist />
-      <Faq />
+      <Experts />
+      <Faq faqImg="/images/AgriHomefaq.jpg"/>
       <News />
       <Footer />
     </>

@@ -8,7 +8,7 @@ const page = () => {
   return (
     <>
     <Navbar />
-      <Banner title="Contact" bgImage="contact-us-hero-bg.webp" />
+      <Banner title="Contact" bgImage="AgriContactBanner.jpg" />
       <ContactForm />
       <MoreHelp />
       <BrandSlider />

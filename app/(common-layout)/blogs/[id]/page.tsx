@@ -2,7 +2,7 @@ import Details from "@/components/blog/Details";
 import Banner from "@/components/shared/Banner";
 import BrandSlider from "@/components/shared/BrandSlider";
 import blogPosts from "@/public/data/blogs";
-
+import Navbar from "@/components/shared/Navbar";
 export async function generateStaticParams() {
   return blogPosts.map(({ id }) => ({
     id: id.toString(),
@@ -12,7 +12,8 @@ export async function generateStaticParams() {
 const BlogDetailsPage = () => {
   return (
     <>
-      <Banner title="Blog Details" bgImage="blog-details-hero-bg.webp" />
+      <Navbar />
+      <Banner title="Blog Details" bgImage="MainBlogBanner.jpg" />
       <Details />
       <BrandSlider />
     </>

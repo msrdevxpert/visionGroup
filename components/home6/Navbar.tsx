@@ -15,6 +15,8 @@ import home1 from "@/public/images/visonGrp_1.png";
 import home2 from "@/public/images/solar_1.png";
 import home3 from "@/public/images/home-333.png";
 import home4 from "@/public/images/agri_1.png";
+import Modal from "../shared/Modal";
+import QuoteForm from "../quote/quote";
 
 const Navbar = () => {
 const navbarData = [
@@ -34,18 +36,24 @@ const navbarData = [
         link: "/solar/",
         img: home2,
       },
-      {
-        id: 1.3,
-        title: "MSR DevXpert",
-        link: "https://msrdevxpert.com",
-        img: home3,
-      },
+      // {
+      //   id: 1.3,
+      //   title: "MSR DevXpert",
+      //   link: "https://msrdevxpert.com",
+      //   img: home3,
+      // },
       {
         id: 1.4,
         title: "VISION AGRIFUTUREPRIVATE LIMITED",
         link: "/agriculture/",
         img: home4,
       },
+      {
+          id: 1.3,
+          title: "MSR DevXpert",
+          link: "https://msrdevxpert.com/",
+          img: home3,
+        },
       // {
       //   id: 1.5,
       //   title: "Online Shop",
@@ -75,11 +83,11 @@ const navbarData = [
         title: "Services",
         link: "/civil/services/",
       },
-      {
-        id: 3.2,
-        title: "Service Details",
-        link: "/civil/services/1/",
-      },
+      // {
+      //   id: 3.2,
+      //   title: "Service Details",
+      //   link: "/civil/services/1/",
+      // },
     ],
   },
   {
@@ -96,16 +104,16 @@ const navbarData = [
         title: "Blog Grid",
         link: "/civil/blog-grid/",
       },
-      {
-        id: 4.3,
-        title: "Blog List",
-        link: "/civil/blog-list/",
-      },
-      {
-        id: 4.4,
-        title: "Blog Details",
-        link: "/civil/blogs/1/",
-      },
+      // {
+      //   id: 4.3,
+      //   title: "Blog List",
+      //   link: "/civil/blog-list/",
+      // },
+      // {
+      //   id: 4.4,
+      //   title: "Blog Details",
+      //   link: "/civil/blogs/1/",
+      // },
     ],
   },
   // {
@@ -148,37 +156,47 @@ const navbarData = [
         title: "Projects",
         link: "/civil/projects/",
       },
+      // {
+      //   id: 6.2,
+      //   title: "Project Details",
+      //   link: "/civil/projects/1/",
+      // },
+        {
+          id: 6.3,
+          title: "Certification",
+          link: "/civil/certificate",
+        },
       {
-        id: 6.2,
-        title: "Project Details",
-        link: "/civil/projects/1/",
-      },
-      {
-        id: 6.3,
+        id: 6.4,
         title: "Contact",
         link: "/civil/contact/",
       },
       {
-        id: 6.4,
+        id: 6.5,
         title: "Faq",
         link: "/civil/faq/",
       },
+      // {
+      //   id: 6.6,
+      //   title: "Sign Up",
+      //   link: "/sign-up/",
+      // },
       {
-        id: 6.5,
-        title: "Sign Up",
-        link: "/sign-up/",
-      },
-      {
-        id: 6.6,
+        id: 6.7,
         title: "Sign In",
         link: "/sign-in/",
       },
-      {
-        id: 6.7,
-        title: "404",
-        link: "/404/",
-      },
+      // {
+      //   id: 6.8,
+      //   title: "404",
+      //   link: "/404/",
+      // },
     ],
+  },
+   {
+    id: 7,
+    title: "Careers",
+    link: "/civil/careers/",
   },
 ];
 
@@ -328,10 +346,14 @@ const navbarData = [
                 <button onClick={() => setSearch(true)} className="search-popup-btn text-white xl-text">
                   <i className="ti ti-search"></i>
                 </button>
-                <Cart />
-                <Link href="/contact-us" className="secondary3-btn d-none d-lg-block">
-                  Get a Quote <i className="ti ti-arrow-up-right"></i>
-                </Link>
+                {/* <Cart /> */}
+                <button
+  className="primary-btn d-none d-lg-block"
+  data-bs-toggle="modal"
+  data-bs-target="#quoteModal"
+>
+  Get a Quote <i className="ti ti-arrow-up-right"></i>
+</button>
                 <button onClick={() => setSidebarOpen(true)} className="show-offcanvas bg-transparent border-0 d-none d-xl-block fs-3">
                   <i className="ti ti-layout-grid"></i>
                 </button>
@@ -346,6 +368,9 @@ const navbarData = [
       <Search search={search} setSearch={setSearch} />
       <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen}  logo={logo} />
       <MobileMenu mobileMenu={mobileMenu} setMobileMenu={setMobileMenu} navbarData={navbarData} logo={logo} />
+       <Modal id="quoteModal" title="Request a Quote">
+  <QuoteForm isModal />
+</Modal>
     </>
   );
 };

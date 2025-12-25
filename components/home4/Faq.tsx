@@ -1,77 +1,126 @@
 "use client";
-import faqs from "@/public/data/faqData";
-import company1 from "@/public/images/company-1.png";
-import company2 from "@/public/images/company-2.png";
-import company3 from "@/public/images/company-3.png";
-import company4 from "@/public/images/company-4.png";
-import faqBg4 from "@/public/images/faq-bg-4.webp";
+
+import { useEffect, useState } from "react";
 import Image, { StaticImageData } from "next/image";
 import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import FaqItem from "../shared/FaqItem";
-const Faq = ({ faqImg = faqBg4 }: { faqImg?: StaticImageData | string }) => {
+import client1 from "@/public/images/GroupSuurya.png";
+import client2 from "@/public/images/evolve.png";
+import client3 from "@/public/images/Asun.png";
+import client5 from "@/public/images/ModiGroup.png";
+import client6 from "@/public/images/MK.jpeg";
+
+type FaqType = {
+  id: string;
+  question: string;
+  answer: string;
+  isActive: boolean;
+  displayOrder: number;
+};
+
+type FaqProps = {
+  faqImg?: StaticImageData | string; // dynamic image
+  type?: "agri" | "civil";
+};
+
+const Faq = ({ faqImg, type = "agri" }: FaqProps) => {
+  const [faqs, setFaqs] = useState<FaqType[]>([]);
+
+  useEffect(() => {
+    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/faqs/public`)
+      .then((res) => res.json())
+      .then((res) => {
+        if (res?.status === "success") {
+          const activeFaqs = res.data
+            .filter((f: FaqType) => f.isActive)
+            .sort((a: FaqType, b: FaqType) => a.displayOrder - b.displayOrder);
+
+          setFaqs(activeFaqs);
+        }
+      })
+      .catch(() => {});
+  }, []);
+
   return (
     <section className="faq-2">
       <div className="container-fluid overflow-x-hidden">
         <div className="row overflow-hidden">
-          <div className="d-none d-lg-block col-lg-5 px-0 position-relative">
-            <div className="reveal reveal--right">
-              <Image src={faqImg} className="img-fluid testimonial-img" alt="" />
+
+          {/* IMAGE LEFT */}
+          {faqImg && (
+            <div
+              className="d-none d-lg-block col-lg-5 px-0 position-relative"
+              style={{ height: "610px" }} // parent height for fill
+            >
+              {typeof faqImg === "string" ? (
+                <Image
+                  src={faqImg}
+                  alt=""
+                  fill
+                  style={{ objectFit: "cover" }}
+                />
+              ) : (
+                <Image
+                  src={faqImg}
+                  alt=""
+                  className="w-100 h-100 object-fit-cover"
+                />
+              )}
             </div>
-          </div>
+          )}
+
           <div className="col-lg-7 px-0 d-flex flex-column justify-content-between">
             <div className="row">
               <div className="col-xxl-9">
                 <div className="faq-content no-cta">
-                  <h2 className="fade_up_anim">FAQs For Water Energy</h2>
+                  {/* Dynamic heading */}
+                  <h2 className="fade_up_anim">
+                    FAQs For {type === "agri" ? "Agricultural" : "Civil"} Solutions
+                  </h2>
+
+                  {/* Dynamic text */}
                   <p className="pb-lg-2 mb-4 fade_up_anim" data-delay=".3">
-                    Have questions about our water energy solutions? We&apos;ve gathered the most frequently asked questions to help.
+                    {type === "agri"
+                      ? "Find answers to common questions about our agriculture-focused services, including modern farming techniques, crop management, and farm operations support."
+                      : "Find answers to common questions about our civil engineering solutions, including sustainable building solutions, water infrastructure, and urban projects."}
                   </p>
+
+                  {/* FAQ items */}
                   <div className="accordion d-flex flex-column gap-3 gap-xxl-4" id="home4Faq">
-                    {faqs.slice(0, 5).map((faq) => (
-                      <FaqItem key={faq.id} {...faq} cls="bg1" databsParent="#home4Faq" />
+                    {faqs.map((faq) => (
+                      <FaqItem
+                        key={faq.id}
+                        id={faq.id}
+                        question={faq.question}
+                        answer={faq.answer}
+                        cls="bg1"
+                        databsParent="#home4Faq"
+                      />
                     ))}
                   </div>
                 </div>
               </div>
             </div>
+
+            {/* Brand slider */}
             <div className="w-100">
               <Swiper
-                autoplay={{
-                  delay: 1,
-                }}
+                autoplay={{ delay: 1 }}
                 speed={5000}
                 loop
                 slidesPerView={"auto"}
                 modules={[Autoplay]}
-                className="swiper logo-slider-2"
+                className="swiper logo-slider-4"
               >
-                <SwiperSlide className="brand-slide">
-                  <Image src={company1} className="img-fluid" alt="" />
-                </SwiperSlide>
-                <SwiperSlide className="brand-slide">
-                  <Image src={company2} className="img-fluid" alt="" />
-                </SwiperSlide>
-                <SwiperSlide className="brand-slide">
-                  <Image src={company3} className="img-fluid" alt="" />
-                </SwiperSlide>
-                <SwiperSlide className="brand-slide">
-                  <Image src={company4} className="img-fluid" alt="" />
-                </SwiperSlide>
-                <SwiperSlide className="brand-slide">
-                  <Image src={company1} className="img-fluid" alt="" />
-                </SwiperSlide>
-                <SwiperSlide className="brand-slide">
-                  <Image src={company2} className="img-fluid" alt="" />
-                </SwiperSlide>
-                <SwiperSlide className="brand-slide">
-                  <Image src={company3} className="img-fluid" alt="" />
-                </SwiperSlide>
-                <SwiperSlide className="brand-slide">
-                  <Image src={company4} className="img-fluid" alt="" />
-                </SwiperSlide>
+                {[client1, client2, client3, client5, client6].map((client, idx) => (
+                  <SwiperSlide key={idx} className="brand-slide" style={{ paddingInline: "100px" }}>
+                    <Image src={client} className="img-fluid" alt="" style={{ width: "150px" }} />
+                  </SwiperSlide>
+                ))}
               </Swiper>
             </div>
+
           </div>
         </div>
       </div>

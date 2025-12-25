@@ -1,6 +1,16 @@
+"use client";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const WhyChoose = () => {
+    const pathname = usePathname();
+  const segments = pathname.split("/").filter(Boolean);
+
+  let projectUrl = "/projects";
+
+  if (segments.length >= 2) {
+    projectUrl = `/${segments[0]}/projects`;
+  }
   return (
     <section className="whychoose">
       <div className="side-text d-none d-xl-flex flex-column align-items-center gap-5">
@@ -31,7 +41,7 @@ integrity...
                     <i className="ti ti-point-filled"></i> Partnership &amp; Trust 
                   </li>
                 </ul>
-                <Link className="primary-btn" href="/projects">
+                <Link className="primary-btn" href={projectUrl}>
                   Our Projects <i className="ti ti-arrow-up-right"></i>
                 </Link>
               </div>

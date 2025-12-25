@@ -10,3 +10,26 @@
     position: relative;
   }
 }
+
+
+// ====================================================
+.status-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+  border-radius: 20px;
+  margin-bottom: 8px;
+}
+
+.status-badge.completed {
+  background: #e6f7ef;
+  color: #1a7f5a;
+}
+
+.status-badge.ongoing {
+  background: #fff4e5;
+  color: #b45309;
+}
+

@@ -1,8 +1,10 @@
 "use client";
-import company1 from "@/public/images/company-1.png";
-import company2 from "@/public/images/company-2.png";
-import company3 from "@/public/images/company-3.png";
-import company4 from "@/public/images/company-4.png";
+import client1 from "@/public/images/GroupSuurya.png";
+import client2 from "@/public/images/evolve.png";
+import client3 from "@/public/images/Asun.png";
+import client4 from "@/public/images/KingSolar.jpeg";
+import client5 from "@/public/images/ModiGroup.png";
+import client6 from "@/public/images/MK.jpeg";
 import Image from "next/image";
 import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -15,55 +17,26 @@ const BrandSlider = () => {
             <p className="mb-0 ms-lg-2 px-3">We have worked with major brands worldwide___</p>
           </div>
           <div className="col-lg-7">
-            <Swiper loop autoplay spaceBetween={16} slidesPerView={"auto"} modules={[Autoplay]} className="swiper brand-swiper">
-              <SwiperSlide>
-                <Image src={company1} alt="" />
+            <Swiper loop autoplay spaceBetween={6} slidesPerView={"auto"} modules={[Autoplay]} className="swiper brand-swiper">
+              <SwiperSlide style={{paddingInline:"100px"}}>
+                <Image src={client1} className="" alt="" style={{width:"150px", height:"100px"}} />
               </SwiperSlide>
-              <SwiperSlide>
-                <Image src={company2} alt="" />
+              <SwiperSlide style={{paddingInline:"100px"}}>
+                <Image src={client2} className="" alt="" style={{width:"150px", height:"100px"}}/>
               </SwiperSlide>
-              <SwiperSlide>
-                <Image src={company3} alt="" />
+              <SwiperSlide style={{paddingInline:"100px"}}>
+                <Image src={client3} className="" alt="" style={{width:"150px", height:"100px"}}/>
               </SwiperSlide>
-              <SwiperSlide>
-                <Image src={company4} alt="" />
+              <SwiperSlide style={{paddingInline:"100px"}}>
+                <Image src={client4} className="" alt="" style={{width:"150px", height:"100px"}}/>
               </SwiperSlide>
-              <SwiperSlide>
-                <Image src={company1} alt="" />
+              <SwiperSlide style={{paddingInline:"100px"}}>
+                <Image src={client5} className="" alt="" style={{width:"150px", height:"100px"}}/>
               </SwiperSlide>
-              <SwiperSlide>
-                <Image src={company2} alt="" />
+              <SwiperSlide style={{paddingInline:"100px"}}>
+                <Image src={client6} className="" alt="" style={{width:"150px", height:"100px"}} />
               </SwiperSlide>
-              <SwiperSlide>
-                <Image src={company3} alt="" />
-              </SwiperSlide>
-              <SwiperSlide>
-                <Image src={company4} alt="" />
-              </SwiperSlide>
-              <SwiperSlide>
-                <Image src={company1} alt="" />
-              </SwiperSlide>
-              <SwiperSlide>
-                <Image src={company2} alt="" />
-              </SwiperSlide>
-              <SwiperSlide>
-                <Image src={company3} alt="" />
-              </SwiperSlide>
-              <SwiperSlide>
-                <Image src={company4} alt="" />
-              </SwiperSlide>
-              <SwiperSlide>
-                <Image src={company1} alt="" />
-              </SwiperSlide>
-              <SwiperSlide>
-                <Image src={company2} alt="" />
-              </SwiperSlide>
-              <SwiperSlide>
-                <Image src={company3} alt="" />
-              </SwiperSlide>
-              <SwiperSlide>
-                <Image src={company4} alt="" />
-              </SwiperSlide>
+             
             </Swiper>
           </div>
         </div>

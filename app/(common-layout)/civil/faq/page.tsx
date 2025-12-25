@@ -9,11 +9,12 @@ const page = () => {
   return (
     <>
     <Navbar />
-      <Banner title="Faq" bgImage="faq-hero-bg.webp" />
+      <Banner title="Faq" bgImage="CivilFAQBanner.jpg" />
       <Faqs />
       <WhyChoose />
       <Experts />
       <BrandSlider />
+      
     </>
   );
 };

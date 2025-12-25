@@ -16,7 +16,7 @@ const HomeSix = () => {
       <Hero />
       <Services />
       <Features />
-      <ProjectShowcase />
+      <ProjectShowcase type="civil" />
       <Specialist />
       <Testimonial />
       <Faq faqImg={faqbg6} />

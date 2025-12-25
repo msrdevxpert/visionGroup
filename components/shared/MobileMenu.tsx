@@ -5,6 +5,8 @@ import { usePathname } from "next/navigation";
 import { Dispatch, SetStateAction, useState, useEffect } from "react";
 import AnimateHeight from "react-animate-height";
 import { isActive } from "./Functions";
+import Modal from "./Modal";
+import QuoteForm from "../quote/quote";
 
 type Props = {
   mobileMenu: boolean;
@@ -82,14 +84,23 @@ const MobileMenu = ({ mobileMenu, setMobileMenu, navbarData, logo }: Props) => {
               )}
             </ul>
 
-            <Link href="/contact-us" className="primary-btn max-w-full w-100">
-              Get a Quote <i className="ti ti-arrow-up-right"></i>
-            </Link>
+           <button
+  type="button"
+  className="primary-btn max-w-full w-100"
+  data-bs-toggle="modal"
+  data-bs-target="#quoteModal"
+>
+  Get a Quote <i className="ti ti-arrow-up-right"></i>
+</button>
+
           </nav>
         </div>
       </header>
 
       <div className="mobile-menu-overlay d-lg-none" onClick={() => setMobileMenu(false)}></div>
+      <Modal id="quoteModal" title="Request a Quote">
+  <QuoteForm />
+</Modal>
     </>
   );
 };

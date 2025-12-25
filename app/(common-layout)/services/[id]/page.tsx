@@ -2,6 +2,7 @@ import Details from "@/components/serivces/Details";
 import Banner from "@/components/shared/Banner";
 import BrandSlider from "@/components/shared/BrandSlider";
 import services from "@/public/data/services";
+import Navbar from "@/components/shared/Navbar";
 
 export async function generateStaticParams() {
   return services.map(({ id }) => ({
@@ -9,14 +10,22 @@ export async function generateStaticParams() {
   }));
 }
 
-const page = () => {
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ id: string }>; // 🔥 IMPORTANT
+}) {
+  const { id } = await params; // ✅ MUST
+
   return (
     <>
-      <Banner title="Services" bgImage="service-details-hero-bg.webp" />
-      <Details />
+      <Navbar />
+      <Banner title="Services" bgImage="MainServicesBanner.jpg" />
+
+      {/* ✅ Pass ID and TYPE */}
+      <Details id={id} type="main" />
+
       <BrandSlider />
     </>
   );
-};
-
-export default page;
+}

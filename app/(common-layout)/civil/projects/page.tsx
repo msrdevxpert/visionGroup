@@ -8,9 +8,9 @@ const page = () => {
   return (
     <>
     <Navbar />
-      <Banner title="Projects" bgImage="project-hero-bg.webp" />
-      <Projects />
-      <Testimonial />
+      <Banner title="Projects" bgImage="CivilProjectBanner.jpg" />
+      <Projects type="civil"/>
+      <Testimonial bgImage="/images/CivilProjectTestimon.png"/>
       <Specialist />
     </>
   );

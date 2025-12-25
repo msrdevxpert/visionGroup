@@ -8,10 +8,10 @@ const page = () => {
   return (
     <>
     <Navbar />
-      <Banner title="Services" bgImage="service-banner-bg.webp" />
-      <Services />
-      <Specialist cls="n0" />
-      <Testimonial />
+      <Banner title="Services" bgImage="AgricultureServiceBanner.jpg" />
+      <Services type="agri" />
+      <Specialist cls="n0"  />
+      <Testimonial type="agri" url="/images/AgriTestiMonVdo.mp4" bgImage="/images/AgriTestimo1.png" />
     </>
   );
 };

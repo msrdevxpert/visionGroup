@@ -1,7 +1,42 @@
-import LogoBlack from "@/public/images/logo-black.png";
+"use client";
+
+import LogoBlack from "@/public/images/visionGroupLogo.png";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 const Footer = () => {
+   const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const res = await fetch(
+        "https://visiongreen-production.up.railway.app/api/v1/newsletter/subscribe",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: email,   // 👈 ONLY email
+          }),
+        }
+      );
+
+      const data = await res.json();
+
+      if (!res.ok) throw new Error(data?.message || "Subscription failed");
+
+      alert("Subscribed successfully! 🎉");
+      setEmail("");
+    } catch (err: any) {
+      alert(err?.message || "Something went wrong");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <footer className="footer footer-two position-relative">
       <div className="container-fluid content">
@@ -58,23 +93,34 @@ const Footer = () => {
             </div>
             <div className="col-md-8 col-xl-9">
               <div className="navigate-part">
-                <div className="top">
-                  <div className="row">
-                    <div className="col-lg-6">
-                      <h2 className="fade_up_anim fw-normal text-n500">Subscribe to our newsletter for the latest updates</h2>
-                    </div>
-                    <div className="col-lg-6">
-                      <div className="d-flex justify-content-end">
-                        <form className="two">
-                          <input type="email" className="ps-2" placeholder="Your Email..." required />
-                          <button>
-                            <i className="ti ti-send"></i>
-                          </button>
-                        </form>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                 <div className="top">
+        <div className="row">
+          <div className="col-lg-6">
+            <h2 className="fade_up_anim fw-normal text-n500">
+              Subscribe to our newsletter for the latest updates
+            </h2>
+          </div>
+
+          <div className="col-lg-6">
+            <div className="d-flex justify-content-end">
+              <form className="two" onSubmit={handleSubscribe}>
+                <input
+                  type="email"
+                  className="ps-2 text-black placeholder-gray-500"
+                  placeholder="Your Email..."
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+
+                <button disabled={loading}>
+                  {loading ? "..." : <i className="ti ti-send"></i>}
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
                 <div className="row g-3 g-lg-0">
                   <div className="col-sm-6 col-xl-3 fade_up_anim">
                     <h4 className="mb-4 text-n500">Quick Link</h4>
@@ -102,9 +148,9 @@ const Footer = () => {
                       <li>
                         <Link href="/"> Projects</Link>
                       </li>
-                      <li>
+                      {/* <li>
                         <Link href="/about-us"> Project Details</Link>
-                      </li>
+                      </li> */}
                       <li>
                         <Link href="/services"> Blog</Link>
                       </li>
@@ -122,7 +168,7 @@ const Footer = () => {
                       <li>
                         <Link href="/"> Products</Link>
                       </li>
-                      <li>
+                      {/* <li>
                         <Link href="/about-us"> Product Details</Link>
                       </li>
                       <li>
@@ -133,7 +179,7 @@ const Footer = () => {
                       </li>
                       <li>
                         <Link href="/contact-us"> Payment</Link>
-                      </li>
+                      </li> */}
                     </ul>
                   </div>
                   <div className="col-sm-6 col-xl-3 fade_up_anim" data-delay=".6">
@@ -178,7 +224,7 @@ const Footer = () => {
             <p>
               Copyright ©
               <Link href="/" className="text-secondary3">
-                Solarox
+                VisionGroup&nbsp;
               </Link>
               All rights reserved.
             </p>

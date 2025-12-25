@@ -7,18 +7,20 @@ import { Autoplay, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 type Story = {
-  id: number;
-  image: string;
+  id: string;
+  projectType: string;
   title: string;
   description: string;
+  imageUrl: string;
 };
+
 
 const SolarInstall = () => {
   const [stories, setStories] = useState<Story[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("https://visiongreen-production.up.railway.app/api/v1/solar-energy/projects")
+    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/unified/projects?type=SOLAR`)
       .then((res) => res.json())
       .then((result) => {
         setStories(result?.data || []);
@@ -83,19 +85,34 @@ const SolarInstall = () => {
           className="swiper"
         >
           {stories.map((story) => (
-            <SwiperSlide key={story.id}>
-              <div className="story-slide-box position-relative">
-                <Image src={story.image} className="img-fluid" alt={story.title} />
-                <div className="success-info">
-                  <h3 className="mb-3 mb-xl-4">{story.title}</h3>
-                  <p className="mb-4 d-none d-sm-block">{story.description}</p>
-                  <Link href={`/projects/${story.id}`} className="black-btn p-2 fs-5">
-                    <i className="ti ti-arrow-up-right"></i>
-                  </Link>
-                </div>
-              </div>
-            </SwiperSlide>
-          ))}
+  <SwiperSlide key={story.id}>
+    <div className="story-slide-box position-relative">
+      <Image
+        src={story.imageUrl}
+        alt={story.title}
+        width={800}
+        height={500}
+        className="img-fluid"
+      />
+
+      <div className="success-info">
+        <h3 className="mb-3 mb-xl-4">{story.title}</h3>
+
+        <p className="mb-4 d-none d-sm-block">
+          {story.description}
+        </p>
+
+        <Link
+          href={`/projects/${story.id}`}
+          className="black-btn p-2 fs-5"
+        >
+          <i className="ti ti-arrow-up-right"></i>
+        </Link>
+      </div>
+    </div>
+  </SwiperSlide>
+))}
+
         </Swiper>
       </div>
     </section>

@@ -5,7 +5,13 @@ import Select from "react-select";
 
 type Option = { value: string; label: string };
 
-export default function RSelect({ options, cls }: { options: Option[]; cls?: string }) {
+type RSelectProps = {
+  options: Option[];
+  cls?: string;
+  onChange?: (option: Option | null) => void; // ✅ add
+};
+
+export default function RSelect({ options, cls, onChange }: RSelectProps) {
   const [selectedOption, setSelectedOption] = useState<Option | null>(options[0]);
   const [isClient, setIsClient] = useState(false);
 
@@ -13,19 +19,25 @@ export default function RSelect({ options, cls }: { options: Option[]; cls?: str
     setIsClient(true);
   }, []);
 
-  if (!isClient) return null; // Prevent rendering on the server
+  if (!isClient) return null;
+
+  const handleChange = (option: Option | null) => {
+    setSelectedOption(option); // existing behavior
+    onChange?.(option);        // ✅ parent notify
+  };
 
   return (
     <Select
       classNames={{
-        control: ({ isFocused }) => `react-select ${isFocused ? "focused" : ""} ${cls}`,
+        control: ({ isFocused }) =>
+          `react-select ${isFocused ? "focused" : ""} ${cls || ""}`,
         singleValue: () => "single-value",
       }}
       components={{
         IndicatorSeparator: () => null,
       }}
-      defaultValue={selectedOption}
-      onChange={setSelectedOption}
+      value={selectedOption}      // 🔥 better than defaultValue
+      onChange={handleChange}     // ✅ fixed
       options={options}
     />
   );

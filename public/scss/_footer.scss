@@ -83,11 +83,12 @@
     }
     @include screen(xxl) {
       padding: 120px 110px;
-      background-image: url(/images/cta-2.webp);
+      background-image: url(/images/output-onlinepngtools.png);
+     
     }
     background-size: cover;
     background-repeat: no-repeat;
-    background-color: $primary;
+    background-color: #dbdbdb;
     .cta-content {
       max-width: 636px;
     }

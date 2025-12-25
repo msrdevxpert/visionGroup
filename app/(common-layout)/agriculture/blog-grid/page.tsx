@@ -7,7 +7,7 @@ const page = () => {
   return (
     <>
     <Navbar />
-      <Banner title="Blog Grid" bgImage="blog-hero-bg.webp" />
+      <Banner title="Blog Grid" bgImage="AgriBlogGrid.jpg" />
       <Grid />
       <BrandSlider />
     </>

@@ -10,15 +10,22 @@ export async function generateStaticParams() {
   }));
 }
 
-const page = () => {
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ id: string }>; // 🔥 MUST
+}) {
+  const { id } = await params; // ✅ await params
+
   return (
     <>
-    <Navbar />
-      <Banner title="Services" bgImage="service-details-hero-bg.webp" />
-      <Details />
+      <Navbar />
+      <Banner title="Services" bgImage="CivilServicesBanner.jpg" />
+
+      {/* ✅ id + type passed properly */}
+      <Details id={id} type="civil" />
+
       <BrandSlider />
     </>
   );
-};
-
-export default page;
+}

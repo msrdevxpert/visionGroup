@@ -7,7 +7,7 @@ const BlogStandard = () => {
   return (
     <>
     <Navbar />
-      <Banner title="Blog Standard" bgImage="blog-standard-hero.webp" />
+      <Banner title="Blog Standard" bgImage="CivilBlogBanner.jpg" />
       <Standard />
       <BrandSlider />
     </>

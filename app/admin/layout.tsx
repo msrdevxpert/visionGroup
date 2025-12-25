@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Sidebar from "../../components/admin/Sidebar";
 import Topbar from "../../components/admin/Topbar";
 import "@/public/admin/styles.css";
+import Footer from "@/components/admin/Footer";
 
 export default function AdminLayout({
   children,
@@ -32,6 +33,7 @@ export default function AdminLayout({
       <main className="admin-main">
         <Topbar fullName={fullName} />
         <div className="admin-content">{children}</div>
+        <Footer />
       </main>
     </div>
   );

@@ -7,8 +7,8 @@ const BlogStandard = () => {
   return (
     <>
     <Navbar />
-      <Banner title="Blog Standard" bgImage="blog-standard-hero.webp" />
-      <Standard />
+      <Banner title="Blog Standard" bgImage="AgriBlogStandard.jpg" />
+      <Standard type="agri"/>
       <BrandSlider />
     </>
   );
