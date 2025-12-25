@@ -1,5 +1,5 @@
 // app/careers/[id]/page.tsx
-"use client"; // client-side dynamic fetch
+// "use client"; // client-side dynamic fetch
 import CareerDetails from "@/components/careers/CareerDetails";
 import Banner from "@/components/shared/Banner";
 import BrandSlider from "@/components/shared/BrandSlider";
