@@ -12,8 +12,10 @@ type Career = {
   description: string;
   createdAt: string;
 };
-
-const CareerDetails = () => {
+type CareerDetailsProps = {
+  careerId: string;
+};
+const CareerDetails = ({ careerId }: CareerDetailsProps)  => {
   const { id } = useParams();
   const router = useRouter();
   const pathname = usePathname();
@@ -24,7 +26,7 @@ const CareerDetails = () => {
   useEffect(() => {
     if (!id) return;
 
-    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/careers/${id}`)
+    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/careers/${careerId}`)
       .then((res) => res.json())
       .then((res) => {
         setCareer(res.data);
