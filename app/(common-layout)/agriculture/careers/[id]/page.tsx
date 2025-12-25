@@ -1,11 +1,10 @@
-// app/(common-layout)/careers/[id]/page.tsx
-
+// app/(common-layout)/agriculture/careers/[id]/page.tsx
 import CareerDetails from "@/components/careers/CareerDetails";
 import Banner from "@/components/shared/Banner";
 import BrandSlider from "@/components/shared/BrandSlider";
 import Navbar from "@/components/home4/NavBar";
 
-// Generate static paths for SSG
+// Generate static params for SSG
 export async function generateStaticParams() {
   const res = await fetch(
     "https://visiongreen-production.up.railway.app/api/v1/careers"
@@ -17,8 +16,8 @@ export async function generateStaticParams() {
   }));
 }
 
-// Page component: async, params inferred by Next
-const CareerDetailsPage = async ({ params }: { params: { id: string } }) => {
+// ✅ No explicit type annotation for props
+const CareerDetailsPage = async ({ params }) => {
   return (
     <>
       <Navbar />
