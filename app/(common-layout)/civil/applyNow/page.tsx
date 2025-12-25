@@ -3,6 +3,7 @@ import ApplyNowForm from "@/components/applyNow/ApplyNow";
 import Banner from "@/components/shared/Banner";
 import BrandSlider from "@/components/shared/BrandSlider";
 import Navbar from "@/components/home6/Navbar";
+import { Suspense } from "react";
 
 const ApplyNowPage = () => {
   return (
@@ -12,7 +13,9 @@ const ApplyNowPage = () => {
         title="Apply Now"
         bgImage="CertificateDetailsBanner.jpg"
       />
-      <ApplyNowForm />
+   <Suspense fallback={<p>Loading form...</p>}>
+  <ApplyNowForm />
+</Suspense>
       <BrandSlider />
       
     </>
