@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
 import CountUp from "react-countup";
 import { TrendingUp, Bell, DollarSign, Briefcase } from "react-feather";
@@ -16,9 +17,7 @@ interface Stats {
 }
 
 export default function Dashboard() {
-  const authTokenStr = localStorage.getItem("authLogin");
-  const authToken = authTokenStr ? JSON.parse(authTokenStr) : null;
-
+  const [authToken, setAuthToken] = useState<{ accessToken: string } | null>(null);
   const [stats, setStats] = useState<Stats | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -27,12 +26,27 @@ export default function Dashboard() {
   const [enquiryType, setEnquiryType] = useState("ALL");
   const [projectStatus, setProjectStatus] = useState("ALL");
 
+  // Get token from localStorage (client-only)
   useEffect(() => {
+    const tokenStr = localStorage.getItem("authLogin");
+    if (tokenStr) setAuthToken(JSON.parse(tokenStr));
+  }, []);
+
+  // Fetch dashboard stats only if token exists
+  useEffect(() => {
+    if (!authToken) return;
+
     const getStats = async () => {
       try {
         const res = await fetch(
           `${process.env.NEXT_PUBLIC_API_BASE_URL}/dashboard/stats`,
-          { method: "GET", headers: { "Content-Type": "application/json", Authorization: `Bearer ${authToken?.accessToken}`, }, }
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${authToken.accessToken}`,
+            },
+          }
         );
         const json = await res.json();
         setStats(json?.data);
@@ -42,13 +56,14 @@ export default function Dashboard() {
         setLoading(false);
       }
     };
+
     getStats();
-  }, []);
+  }, [authToken]);
 
   if (loading) return <h4 className="text-center mt-5">Loading dashboard…</h4>;
   if (!stats) return <h5 className="text-center mt-5">No data found</h5>;
 
-  // Derived values based on filters
+  // Filtered values
   const filteredProjects =
     projectType === "ALL"
       ? stats.totalProjects
@@ -69,8 +84,13 @@ export default function Dashboard() {
       ? stats.completedProjects
       : stats.projectsByStatus?.[projectStatus] || 0;
 
-  // Helper for card icon container
-  const IconWrapper = ({ children, bg }: { children: React.ReactNode; bg: string }) => (
+  const IconWrapper = ({
+    children,
+    bg,
+  }: {
+    children: React.ReactNode;
+    bg: string;
+  }) => (
     <div
       style={{
         background: bg,
@@ -94,7 +114,10 @@ export default function Dashboard() {
         <Row className="gy-2">
           <Col md={3}>
             <Form.Label>Project Type</Form.Label>
-            <Form.Select value={projectType} onChange={(e) => setProjectType(e.target.value)}>
+            <Form.Select
+              value={projectType}
+              onChange={(e) => setProjectType(e.target.value)}
+            >
               <option value="ALL">All</option>
               <option value="CIVIL">Civil</option>
               <option value="AGRI">Agri</option>
@@ -103,7 +126,10 @@ export default function Dashboard() {
           </Col>
           <Col md={3}>
             <Form.Label>Service Type</Form.Label>
-            <Form.Select value={serviceType} onChange={(e) => setServiceType(e.target.value)}>
+            <Form.Select
+              value={serviceType}
+              onChange={(e) => setServiceType(e.target.value)}
+            >
               <option value="ALL">All</option>
               <option value="CIVIL">Civil</option>
               <option value="AGRI">Agri</option>
@@ -112,7 +138,10 @@ export default function Dashboard() {
           </Col>
           <Col md={3}>
             <Form.Label>Enquiry Type</Form.Label>
-            <Form.Select value={enquiryType} onChange={(e) => setEnquiryType(e.target.value)}>
+            <Form.Select
+              value={enquiryType}
+              onChange={(e) => setEnquiryType(e.target.value)}
+            >
               <option value="ALL">All</option>
               <option value="CIVIL">Civil</option>
               <option value="AGRI">Agri</option>
@@ -121,7 +150,10 @@ export default function Dashboard() {
           </Col>
           <Col md={3}>
             <Form.Label>Project Status</Form.Label>
-            <Form.Select value={projectStatus} onChange={(e) => setProjectStatus(e.target.value)}>
+            <Form.Select
+              value={projectStatus}
+              onChange={(e) => setProjectStatus(e.target.value)}
+            >
               <option value="ALL">All</option>
               <option value="pending">Pending</option>
               <option value="ongoing">Ongoing</option>
@@ -185,7 +217,11 @@ export default function Dashboard() {
           <Card className="shadow-sm">
             <Card.Body className="d-flex justify-content-between align-items-center">
               <div>
-                <h6>{serviceType === "ALL" ? "Total Services" : `Services (${serviceType})`}</h6>
+                <h6>
+                  {serviceType === "ALL"
+                    ? "Total Services"
+                    : `Services (${serviceType})`}
+                </h6>
                 <h3>
                   <CountUp end={filteredServices} separator="," duration={1.2} />
                 </h3>
@@ -203,7 +239,11 @@ export default function Dashboard() {
               <div>
                 <h6>Total Capacity (KW)</h6>
                 <h3>
-                  <CountUp end={stats.totalCapacityKw || 0} separator="," duration={1.2} />
+                  <CountUp
+                    end={stats.totalCapacityKw || 0}
+                    separator=","
+                    duration={1.2}
+                  />
                 </h3>
               </div>
               <IconWrapper bg="linear-gradient(135deg,#56ccf2,#2f80ed)">
