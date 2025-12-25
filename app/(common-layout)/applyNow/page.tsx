@@ -1,10 +1,11 @@
+"use client";
+
 import ApplyNowForm from "@/components/applyNow/ApplyNow";
 import Banner from "@/components/shared/Banner";
 import BrandSlider from "@/components/shared/BrandSlider";
 import Navbar from "@/components/shared/Navbar";
 
-// No id, just accept searchParams optionally
-const ApplyNowPage = async () => {
+const ApplyNowPage = () => {
   return (
     <>
       <Navbar />
