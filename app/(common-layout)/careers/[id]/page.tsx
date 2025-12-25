@@ -1,21 +1,30 @@
 // app/careers/[id]/page.tsx
+"use client"; // client-side dynamic fetch
 import CareerDetails from "@/components/careers/CareerDetails";
 import Banner from "@/components/shared/Banner";
 import BrandSlider from "@/components/shared/BrandSlider";
 import Navbar from "@/components/shared/Navbar";
 
+type CareerPageProps = {
+  params: {
+    id: string;
+  };
+};
+
+// ✅ Generate static params for SSG
 export async function generateStaticParams() {
-  // Fetch all careers from your API
-  const res = await fetch("https://visiongreen-production.up.railway.app/api/v1/careers");
+  const res = await fetch(
+    "https://visiongreen-production.up.railway.app/api/v1/careers"
+  );
   const careers = await res.json();
 
-  // Return params for each career
   return careers.data.map((career: any) => ({
     id: career.id.toString(),
   }));
 }
 
-const CareerDetailsPage = ({ params }: { params: { id: string } }) => {
+// ✅ Mark component as async to satisfy PageProps constraint
+const CareerDetailsPage = async ({ params }: CareerPageProps) => {
   return (
     <>
       <Navbar />
