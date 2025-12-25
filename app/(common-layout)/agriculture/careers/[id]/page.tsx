@@ -1,13 +1,9 @@
+// app/(common-layout)/agriculture/careers/[id]/page.tsx
+
 import CareerDetails from "@/components/careers/CareerDetails";
 import Banner from "@/components/shared/Banner";
 import BrandSlider from "@/components/shared/BrandSlider";
 import Navbar from "@/components/home4/NavBar";
-
-type CareerPageProps = {
-  params: {
-    id: string;
-  };
-};
 
 // ✅ Generate static params for SSG
 export async function generateStaticParams() {
@@ -21,7 +17,7 @@ export async function generateStaticParams() {
   }));
 }
 
-// ✅ Mark component as async to satisfy PageProps constraint
+// ✅ Async page component with params inferred by Next
 const CareerDetailsPage = async ({ params }: { params: { id: string } }) => {
   return (
     <>
