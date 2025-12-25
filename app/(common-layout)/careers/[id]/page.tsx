@@ -24,7 +24,7 @@ export async function generateStaticParams() {
 }
 
 // ✅ Mark component as async to satisfy PageProps constraint
-const CareerDetailsPage = async ({ params }: CareerPageProps) => {
+const CareerDetailsPage = async ({ params }: { params: { id: string } }) => {
   return (
     <>
       <Navbar />
