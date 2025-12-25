@@ -5,9 +5,7 @@ import axios from "axios";
 import { Button } from "react-bootstrap";
 import ConfirmDialog from "../../shared/ConfirmDialog";
 
- const authTokenStr = localStorage.getItem("authToken");
-//   const authToken = authTokenStr ? JSON.parse(authTokenStr) : null;
-const headers = { Authorization: 'Bearer ' + authTokenStr };
+
 
 interface Service {
   id?: string;
@@ -30,6 +28,17 @@ export const Services_AddForm: React.FC<ServicesAddFormProps> = ({
   fetchTableData,
   onClose,
 }) => {
+      const [authToken, setAuthToken] = useState<string | null>(null);
+    
+      // Safe client-side localStorage access
+      useEffect(() => {
+        const tokenStr = localStorage.getItem("authToken");
+        if (tokenStr) setAuthToken(JSON.parse(tokenStr));
+      }, []);
+    
+      const headers = {
+        Authorization: authToken ? `Bearer ${authToken}` : "",
+      };
   const [formData, setFormData] = useState<Service>({
     serviceType: "",
     name: "",

@@ -6,8 +6,6 @@ import { Button } from "react-bootstrap";
 import { Delete, Download } from "@mui/icons-material";
 import ConfirmDialog from "../../shared/ConfirmDialog";
 
-const authTokenStr = localStorage.getItem("authToken");
-const headers = { Authorization: "Bearer " + authTokenStr };
 
 interface FileItem {
   fileId: string;
@@ -39,6 +37,17 @@ interface Props {
 }
 
 const Team_AddForm: React.FC<Props> = ({ mode, teamData, fetchTableData, onClose }) => {
+      const [authToken, setAuthToken] = useState<string | null>(null);
+    
+      // Safe client-side localStorage access
+      useEffect(() => {
+        const tokenStr = localStorage.getItem("authToken");
+        if (tokenStr) setAuthToken(JSON.parse(tokenStr));
+      }, []);
+    
+      const headers = {
+        Authorization: authToken ? `Bearer ${authToken}` : "",
+      };
   const [formData, setFormData] = useState<Team>({
     memberId: 0,
     fullName: "",
