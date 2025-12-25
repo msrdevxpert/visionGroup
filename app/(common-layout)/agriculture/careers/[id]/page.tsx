@@ -17,7 +17,7 @@ export async function generateStaticParams() {
 }
 
 // ✅ No explicit type annotation for props
-const CareerDetailsPage = async ({ params }) => {
+const CareerDetailsPage = async ({ params }:any) => {
   return (
     <>
       <Navbar />
