@@ -4,13 +4,12 @@ import BrandSlider from "@/components/shared/BrandSlider";
 import Navbar from "@/components/shared/Navbar";
 
 interface PageProps {
-  searchParams: {
-    id?: string;
-  };
+  searchParams: Record<string, string | string[] | undefined>;
 }
 
 const ApplyNowPage = ({ searchParams }: PageProps) => {
-  if (!searchParams.id) return null;
+  const id = searchParams.id as string | undefined; // cast to string if needed
+  if (!id) return null;
 
   return (
     <>

@@ -3,7 +3,12 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export default function Sidebar() {
+interface SidebarProps {
+  isOpen: boolean;
+  toggleSidebar: () => void;
+}
+
+export default function Sidebar({ isOpen, toggleSidebar }: SidebarProps) {
   const path = usePathname();
 
   const menu = [
@@ -16,22 +21,29 @@ export default function Sidebar() {
   ];
 
   return (
-    <aside className="admin-sidebar">
-      <h2 className="logo">Admin</h2>
+    <>
+      {/* Overlay for mobile */}
+      <div
+        className={`sidebar-overlay ${isOpen ? "show" : ""}`}
+        onClick={toggleSidebar}
+      ></div>
 
-      <nav>
-        {menu.map((item) => (
-          <Link
-            key={item.path}
-            href={item.path}
-            className={`admin-link ${
-              path === item.path ? "active" : ""
-            }`}
-          >
-            {item.name}
-          </Link>
-        ))}
-      </nav>
-    </aside>
+      <aside className={`admin-sidebar ${isOpen ? "open" : ""}`}>
+        <h2 className="logo">Admin</h2>
+
+        <nav>
+          {menu.map((item) => (
+            <Link
+              key={item.path}
+              href={item.path}
+              className={`admin-link ${path === item.path ? "active" : ""}`}
+              onClick={() => toggleSidebar()} // close sidebar on link click (mobile)
+            >
+              {item.name}
+            </Link>
+          ))}
+        </nav>
+      </aside>
+    </>
   );
 }
