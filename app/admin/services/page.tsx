@@ -1,3 +1,4 @@
+"use client";
 import Services from "@/components/admin/services/Services";
 
 export default function page() {
