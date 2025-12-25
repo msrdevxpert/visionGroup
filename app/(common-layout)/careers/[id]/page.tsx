@@ -18,7 +18,7 @@ export async function generateStaticParams() {
 }
 
 // Page component: async, params inferred by Next
-const CareerDetailsPage = async ({ params }: { params: { id: string } }) => {
+const CareerDetailsPage = async ({ params }: any) => {
   return (
     <>
       <Navbar />
