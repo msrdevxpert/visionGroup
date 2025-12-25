@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 
 const ApplyNowForm = () => {
   const searchParams = useSearchParams();
-  const positionId = searchParams.get("id");
+  const positionId = searchParams.get("id"); // Get ?id=xxx
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -28,10 +28,7 @@ const ApplyNowForm = () => {
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -44,10 +41,7 @@ const ApplyNowForm = () => {
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            positionId,
-            ...formData,
-          }),
+          body: JSON.stringify({ positionId, ...formData }),
         }
       );
 
@@ -76,7 +70,6 @@ const ApplyNowForm = () => {
         <div className="row justify-content-center">
           <div className="col-lg-10 col-xl-8">
             <div className="contact-form reveal reveal--top">
-
               <div className="contact-title">
                 <h3>Apply for this position</h3>
                 <p>Our HR team will contact you shortly</p>
@@ -84,7 +77,6 @@ const ApplyNowForm = () => {
 
               <form onSubmit={handleSubmit}>
                 <div className="row g-3 g-lg-4">
-
                   <div className="col-md-6">
                     <label>Full Name</label>
                     <input
@@ -139,16 +131,11 @@ const ApplyNowForm = () => {
                   </div>
 
                   <div className="col-12 text-center">
-                    <button
-                      type="submit"
-                      className="primary-btn"
-                      disabled={loading}
-                    >
+                    <button type="submit" className="primary-btn" disabled={loading}>
                       {loading ? "Submitting..." : "Apply Now"}
                       <i className="ti ti-arrow-up-right"></i>
                     </button>
                   </div>
-
                 </div>
               </form>
 
