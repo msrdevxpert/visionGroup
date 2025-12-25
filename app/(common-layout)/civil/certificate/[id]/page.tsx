@@ -1,3 +1,4 @@
+"use client";
 import Details from "@/components/certificate/Details";
 import Banner from "@/components/shared/Banner";
 import BrandSlider from "@/components/shared/BrandSlider";
