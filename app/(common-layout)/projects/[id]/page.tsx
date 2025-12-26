@@ -5,7 +5,7 @@ import Navbar from "@/components/shared/Navbar";
 
 export async function generateStaticParams() {
   const res = await fetch(
-    "https://visiongreen-production.up.railway.app/api/v1/projects"
+    "https://visiongreen-production.up.railway.app/api/v1/unified/projects"
   );
 
   const data = await res.json();
