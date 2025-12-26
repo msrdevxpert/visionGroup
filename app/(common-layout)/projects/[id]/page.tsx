@@ -3,20 +3,31 @@ import Banner from "@/components/shared/Banner";
 import BrandSlider from "@/components/shared/BrandSlider";
 import Navbar from "@/components/shared/Navbar";
 
+export async function generateStaticParams() {
+  const res = await fetch(
+    "https://visiongreen-production.up.railway.app/api/v1/projects"
+  );
+
+  const data = await res.json();
+
+  return data.data.map((item: any) => ({
+    id: item.id.toString(),
+  }));
+}
+
 export default async function ProjectDetailsPage({
   params,
 }: {
-  params: Promise<{ id: string }>; // 🔥 params is Promise
+  params: { id: string };
 }) {
-  const { id } = await params; // ✅ MUST await
-const url = "/images/ProjectForAgri.mp4";
+  const url = "/images/ProjectForAgri.mp4";
+
   return (
     <>
       <Navbar />
       <Banner title="Project Details" bgImage="VisonGroupProjectIdBanner.jpg" />
 
-      {/* ✅ pass awaited id */}
-      <Details id={id} type="main" url={url} />
+      <Details id={params.id} type="main" url={url} />
 
       <BrandSlider />
     </>
