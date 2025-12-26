@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 
 type Certification = {
-  id: any;
+  id: string;
   title: string;
   description: string;
   certificateUrl: string;
@@ -12,9 +12,13 @@ type Certification = {
   createdAt: string;
 };
 
-const CertificationDetails = () => {
+export default function CertificationDetails({
+  certificateId,
+}: {
+  certificateId: string;
+}) {
   const params = useParams();
-  const id = params?.id as any;
+  const id = params?.id as string;
   const [cert, setCert] = useState<Certification | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -22,7 +26,7 @@ const CertificationDetails = () => {
     if (!id) return;
 
     fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/certifications/${id}`
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/certifications/${certificateId}`
     )
       .then((res) => res.json())
       .then((res) => {
@@ -69,4 +73,4 @@ const CertificationDetails = () => {
   );
 };
 
-export default CertificationDetails;
+

@@ -1,11 +1,8 @@
-// app/certificate/[id]/page.tsx
-
 import Details from "@/components/certificate/Details";
 import Banner from "@/components/shared/Banner";
 import BrandSlider from "@/components/shared/BrandSlider";
 import Navbar from "@/components/shared/Navbar";
 
-// ⭐ 1. Generate static paths
 export async function generateStaticParams() {
   const res = await fetch(
     "https://visiongreen-production.up.railway.app/api/v1/certificates"
@@ -18,8 +15,11 @@ export async function generateStaticParams() {
   }));
 }
 
-// ⭐ 2. Page component (don't type params manually)
-export default function CertificationDetailsPage({ params }) {
+export default function CertificationDetailsPage({
+  params,
+}: {
+  params: { id: string };
+}) {
   return (
     <>
       <Navbar />
