@@ -17,11 +17,10 @@ export async function generateStaticParams() {
 }
 
 // ⭐ Dynamic page receives params
-export default function CertificationDetailsPage({
-  params,
-}: {
-  params: { id: string };
-}) {
+export default function CertificationDetailsPage(
+  props: any
+) {
+  const { params } = props as { params: { id: string } };
   return (
     <>
       <Navbar />
