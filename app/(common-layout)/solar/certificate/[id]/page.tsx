@@ -25,12 +25,10 @@ export async function generateStaticParams() {
   }
 }
 
-
 // ⭐ Page receives params (NO "use client")
-export default function CertificationDetailsPage(
-  props: any
-) {
+export default function CertificationDetailsPage(props: any) {
   const { params } = props as { params: { id: string } };
+
   return (
     <>
       <Navbar />
@@ -39,7 +37,6 @@ export default function CertificationDetailsPage(
         bgImage="CertificateDetailsBanner.jpg"
       />
 
-      {/* Pass id to Details */}
       <Details certificateId={params.id} />
 
       <BrandSlider />
