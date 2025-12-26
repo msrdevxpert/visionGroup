@@ -1,45 +1,23 @@
+"use client";
+
+import { useParams } from "next/navigation";
 import Details from "@/components/certificate/Details";
+import Navbar from "@/components/home4/NavBar";
 import Banner from "@/components/shared/Banner";
 import BrandSlider from "@/components/shared/BrandSlider";
-import Navbar from "@/components/home4/NavBar";
 
-// ⭐ Generate static paths for export
-export async function generateStaticParams() {
-  try {
-    const res = await fetch(
-      "https://visiongreen-production.up.railway.app/api/v1/certificates",
-      { cache: "no-store" }
-    );
-
-    const data = await res.json();
-
-    if (!data?.data || !Array.isArray(data.data)) {
-      return [];
-    }
-
-    return data.data.map((item: any) => ({
-      id: item.id.toString(),
-    }));
-  } catch (err) {
-    return [];
-  }
-}
-
-// ⭐ Page receives params (NO "use client")
-export default function CertificationDetailsPage(props: any) {
-  const { params } = props as { params: { id: string } };
+const AgricultureCertificatePage = () => {
+  const { id } = useParams();
+  if (!id) return <p>Loading...</p>;
 
   return (
     <>
       <Navbar />
-      <Banner
-        title="Certification Details"
-        bgImage="CertificateDetailsBanner.jpg"
-      />
-
-      <Details certificateId={params.id} />
-
+      <Banner title="Certificate Details" bgImage="CertificateDetailsBanner.jpg" />
+      <Details certificateId={id} />
       <BrandSlider />
     </>
   );
-}
+};
+
+export default AgricultureCertificatePage;
