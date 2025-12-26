@@ -5,7 +5,7 @@ import Navbar from "@/components/shared/Navbar";
 
 export async function generateStaticParams() {
   const res = await fetch(
-    "https://visiongreen-production.up.railway.app/api/v1/unified/projects"
+    "https://visiongreen-production.up.railway.app/api/v1/projects"
   );
 
   const data = await res.json();
@@ -15,11 +15,9 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function ProjectDetailsPage({
-  params,
-}: {
-  params: { id: string };
-}) {
+export default function ProjectDetailsPage(props: any) {
+  const { params } = props as { params: { id: string } };
+
   const url = "/images/ProjectForAgri.mp4";
 
   return (
