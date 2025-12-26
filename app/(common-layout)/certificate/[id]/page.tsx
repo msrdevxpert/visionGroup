@@ -4,15 +4,24 @@ import BrandSlider from "@/components/shared/BrandSlider";
 import Navbar from "@/components/shared/Navbar";
 
 export async function generateStaticParams() {
-  const res = await fetch(
-    "https://visiongreen-production.up.railway.app/api/v1/certificates"
-  );
+  try {
+    const res = await fetch(
+      "https://visiongreen-production.up.railway.app/api/v1/certificates",
+      { cache: "no-store" }
+    );
 
-  const data = await res.json();
+    const data = await res.json();
 
-  return data.data.map((item: any) => ({
-    id: item.id.toString(),
-  }));
+    if (!data?.data || !Array.isArray(data.data)) {
+      return [];   // 👈 return empty list instead of crashing
+    }
+
+    return data.data.map((item: any) => ({
+      id: item.id.toString(),
+    }));
+  } catch (err) {
+    return []; // 👈 fail silently so build doesn't break
+  }
 }
 
 export default function CertificationDetailsPage(
