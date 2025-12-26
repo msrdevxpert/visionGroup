@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
 
 type AgricultureScheme = {
   id: string;
@@ -12,8 +11,7 @@ type AgricultureScheme = {
   createdAt: string;
 };
 
-const AgricultureSchemeDetails = () => {
-  const { id } = useParams();
+const AgricultureSchemeDetails = ({ id }: { id: string }) => {
   const [scheme, setScheme] = useState<AgricultureScheme | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -25,13 +23,14 @@ const AgricultureSchemeDetails = () => {
     )
       .then((res) => res.json())
       .then((res) => {
-        setScheme(res.data);
+        setScheme(res?.data || null);
         setLoading(false);
       })
       .catch(() => setLoading(false));
   }, [id]);
 
   if (loading) return <p className="text-center pt-120">Loading...</p>;
+
   if (!scheme)
     return <p className="text-center pt-120">No scheme found</p>;
 
