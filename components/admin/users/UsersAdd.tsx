@@ -30,16 +30,21 @@ export const Users_AddForm: React.FC<UsersAddFormProps> = ({
   onClose,
 }) => {
       const [authToken, setAuthToken] = useState<string | null>(null);
+          const [headers, setHeaders] = useState({Authorization:""});
+        
+          // Safe client-side localStorage access
+        useEffect(() => {
+      const tokenStr = localStorage.getItem("authToken");
+      if (tokenStr) {
+        try {
+          setAuthToken(JSON.parse(tokenStr)); // if JSON
+        } catch {
+          setAuthToken(tokenStr); // if plain string
+        }
+      }
+       setHeaders({Authorization: authToken ? `Bearer ${authToken}` : "",})
+    }, []);
     
-      // Safe client-side localStorage access
-      useEffect(() => {
-        const tokenStr = localStorage.getItem("authToken");
-        if (tokenStr) setAuthToken(JSON.parse(tokenStr));
-      }, []);
-    
-      const headers = {
-        Authorization: authToken ? `Bearer ${authToken}` : "",
-      };
   const [formData, setFormData] = useState<User>({
     username: "",
     fullName: "",

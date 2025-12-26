@@ -29,16 +29,22 @@ export const Services_AddForm: React.FC<ServicesAddFormProps> = ({
   onClose,
 }) => {
       const [authToken, setAuthToken] = useState<string | null>(null);
+      const [headers, setHeaders] = useState({Authorization:""});
     
       // Safe client-side localStorage access
-      useEffect(() => {
-        const tokenStr = localStorage.getItem("authToken");
-        if (tokenStr) setAuthToken(JSON.parse(tokenStr));
-      }, []);
+    useEffect(() => {
+  const tokenStr = localStorage.getItem("authToken");
+  if (tokenStr) {
+    try {
+      setAuthToken(JSON.parse(tokenStr)); // if JSON
+    } catch {
+      setAuthToken(tokenStr); // if plain string
+    }
+  }
+   setHeaders({Authorization: authToken ? `Bearer ${authToken}` : "",})
+}, []);
+
     
-      const headers = {
-        Authorization: authToken ? `Bearer ${authToken}` : "",
-      };
   const [formData, setFormData] = useState<Service>({
     serviceType: "",
     name: "",
@@ -80,7 +86,9 @@ export const Services_AddForm: React.FC<ServicesAddFormProps> = ({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+  setHeaders({
+        Authorization: authToken ? `Bearer ${authToken}` : "",
+      });
     try {
       // ADD
       if (mode === 1) {

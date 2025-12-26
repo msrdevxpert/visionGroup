@@ -19,7 +19,7 @@
     "@yaireo/ui-range": "^2.1.15",
     "aos": "^2.3.4",
     "axios": "^1.13.2",
-    "bootstrap": "^5.3.8",
+    "bootstrap": "^5.3.3",
     "export-to-csv": "^1.4.0",
     "fslightbox-react": "^1.7.6",
     "gsap": "^3.12.5",
