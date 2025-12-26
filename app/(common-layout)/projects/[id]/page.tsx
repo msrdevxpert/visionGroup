@@ -4,16 +4,22 @@ import BrandSlider from "@/components/shared/BrandSlider";
 import Navbar from "@/components/shared/Navbar";
 
 export async function generateStaticParams() {
-  const res = await fetch(
-    "https://visiongreen-production.up.railway.app/api/v1/projects"
-  );
+  try {
+    const res = await fetch(
+      "https://visiongreen-production.up.railway.app/api/v1/projects",
+      { cache: "no-store" }
+    );
+    const data = await res.json();
 
-  const data = await res.json();
+    // ✅ Guard against null or invalid data
+    if (!data?.data || !Array.isArray(data.data)) return [];
 
-  return data.data.map((item: any) => ({
-    id: item.id.toString(),
-  }));
+    return data.data.map((item: any) => ({ id: item.id.toString() }));
+  } catch (err) {
+    return [];
+  }
 }
+
 
 export default function ProjectDetailsPage(props: any) {
   const { params } = props as { params: { id: string } };
