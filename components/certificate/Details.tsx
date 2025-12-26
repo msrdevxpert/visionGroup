@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 
 type Certification = {
-  id: string;
+  id: any;
   title: string;
   description: string;
   certificateUrl: string;
@@ -13,7 +13,8 @@ type Certification = {
 };
 
 const CertificationDetails = () => {
-  const { id } = useParams();
+  const params = useParams();
+  const id = params?.id as any;
   const [cert, setCert] = useState<Certification | null>(null);
   const [loading, setLoading] = useState(true);
 
