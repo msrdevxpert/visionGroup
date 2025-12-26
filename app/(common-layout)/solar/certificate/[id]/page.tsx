@@ -14,16 +14,17 @@ export async function generateStaticParams() {
     const data = await res.json();
 
     if (!data?.data || !Array.isArray(data.data)) {
-      return [];   // 👈 return empty list instead of crashing
+      return [];
     }
 
     return data.data.map((item: any) => ({
       id: item.id.toString(),
     }));
   } catch (err) {
-    return []; // 👈 fail silently so build doesn't break
+    return [];
   }
 }
+
 
 // ⭐ Page receives params (NO "use client")
 export default function CertificationDetailsPage(
