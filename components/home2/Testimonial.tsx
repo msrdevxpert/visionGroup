@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { Autoplay, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import quote from "@/public/images/quote.png";
-import testimonialBg2 from "@/public/images/testimonial-bg-2.webp";
+import testimonialBg2 from "@/public/images/SolarContactBanner.jpg";
 
 type TestimonialItem = {
   testimonialId: number;
@@ -72,7 +72,7 @@ const Testimonial = () => {
       <div className="container-fluid px-lg-0 overflow-x-hidden">
         <div className="row">
           {/* LEFT SIDE */}
-          <div className="col-lg-7 left-side">
+          <div className="col-lg-7 left-side p-2">
             <div className="row">
               <div className="col-12 col-lg-10 col-xl-9 offset-lg-2 offset-xl-3">
                 <div className="testimonial-title">
@@ -146,8 +146,8 @@ const Testimonial = () => {
 
           {/* RIGHT SIDE IMAGE */}
           <div className="col-lg-5 px-0 d-none d-lg-block right-side">
-            <div className="reveal reveal--left">
-              <Image src={testimonialBg2} className="img-fluid testimonial-img" alt="" />
+            <div className="reveall reveal--left">
+              <Image src={testimonialBg2} className="img-fluidd testimonial-img" alt="" />
             </div>
           </div>
         </div>
