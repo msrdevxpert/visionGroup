@@ -137,12 +137,10 @@ const Footer = () => {
                       <i className="ti ti-phone-call"></i>
                     </div>
                     <div className="d-flex flex-column gap-1">
-                      <a href="tel:(808)555-0111" className="text-white">
-                        (808) 555-0111,
+                      <a href="tel:(+91)7601955124" className="text-white">
+                        (+91) 7601955124,
                       </a>
-                      <a href="tel:(808)555-0111" className="text-white">
-                        (302) 555-0107
-                      </a>
+                      
                     </div>
                   </li>
                   <li className="contact-item">
@@ -150,12 +148,10 @@ const Footer = () => {
                       <i className="ti ti-mail"></i>
                     </div>
                     <div className="d-flex flex-column gap-1">
-                      <a href="mailto:info@example.com" className="text-white">
-                        info@example.com,
+                      <a href="mailto:info@groupvision.co.in" className="text-white">
+                        http://www.info@groupvision.co.in,
                       </a>
-                      <a href="mailto:info@example.com" className="text-white">
-                        info@example.com
-                      </a>
+                      
                     </div>
                   </li>
                   <li className="contact-item">
@@ -163,7 +159,7 @@ const Footer = () => {
                       <i className="ti ti-map-pin-search"></i>
                     </div>
                     <div className="d-flex flex-column gap-1">
-                      <p className="text-white">2118 Thornridge Cir. Syracuse, Connecticut</p>
+                      <p className="text-white">Plot No.676/3326, 4th Floor, South Side,mouza-lingipur,<br/> Sisupalgarh, Khorda, Lingaraj, Orissa, India, 751 002</p>
                     </div>
                   </li>
                 </ul>
