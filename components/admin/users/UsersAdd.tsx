@@ -44,7 +44,7 @@ export const Users_AddForm: React.FC<UsersAddFormProps> = ({
       }
        setHeaders({Authorization: authToken ? `Bearer ${authToken}` : "",})
     }, []);
-    
+
   const [formData, setFormData] = useState<User>({
     username: "",
     fullName: "",
@@ -102,7 +102,11 @@ export const Users_AddForm: React.FC<UsersAddFormProps> = ({
   // SUBMIT
   // --------------------------
   const handleSubmit = async (e: React.FormEvent) => {
+    
     e.preventDefault();
+          const headers = {
+    Authorization: authToken ? `Bearer ${authToken}` : "",
+  };
 
     try {
       // --------------------------------
@@ -110,7 +114,7 @@ export const Users_AddForm: React.FC<UsersAddFormProps> = ({
       // --------------------------------
       if (mode === 1) {
         await axios.post(
-          `https://visiongreen-production.up.railway.app/api/v1/admin/users`,
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/users`,
           formData,
           { headers }
         );
@@ -122,7 +126,7 @@ export const Users_AddForm: React.FC<UsersAddFormProps> = ({
       // --------------------------------
       // EDIT USER
       // --------------------------------
-      else if (mode === 2 && formData.id) {
+      else if (mode === 2 ) {
         const payload: any = {
           username: formData.username,
           fullName: formData.fullName,
@@ -136,7 +140,7 @@ export const Users_AddForm: React.FC<UsersAddFormProps> = ({
         }
 
         await axios.put(
-          `https://visiongreen-production.up.railway.app/api/v1/admin/users/${formData.id}`,
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/users/${formData.id}`,
           payload,
           { headers }
         );
@@ -155,7 +159,7 @@ export const Users_AddForm: React.FC<UsersAddFormProps> = ({
 
       fetchTableData();
       if (mode === 1) resetForm();
-      if (onClose) onClose();
+      // if (onClose) onClose();
     } catch (err) {
       console.error(err);
       setMsg("Something went wrong!");
@@ -167,19 +171,22 @@ export const Users_AddForm: React.FC<UsersAddFormProps> = ({
   // CONFIRMED DELETE
   // --------------------------
   const handleDelete = async () => {
+          const headers = {
+    Authorization: authToken ? `Bearer ${authToken}` : "",
+  };
     if (!formData.id) return;
 
     try {
       await axios.delete(
-        `https://visiongreen-production.up.railway.app/api/v1/admin/users/${formData.id}`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/users/${formData.id}`,
         { headers }
       );
 
       setMsg("User deleted successfully");
       setMsgTyp("success");
       fetchTableData();
-      set_open(false);
-      if (onClose) onClose();
+      // set_open(false);
+      // if (onClose) onClose();
     } catch (err) {
       console.error(err);
       setMsg("Failed to delete user!");
@@ -217,7 +224,14 @@ export const Users_AddForm: React.FC<UsersAddFormProps> = ({
 
   return (
     <div className="container">
-      {msg && <div ref={msgRef}>{msg}</div>}
+       {msg && (
+  <div
+    ref={msgRef}
+    style={{ color: msgTyp === "success" ? "green" : "red" }}
+  >
+    {msg}
+  </div>
+)}
 
       <h4 className="card-title mb-4">{getFormTitle()}</h4>
 

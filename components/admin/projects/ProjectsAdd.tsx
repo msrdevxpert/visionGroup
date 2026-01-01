@@ -119,6 +119,18 @@ export const Projects_AddForm: React.FC<ProjectsAddFormProps> = ({
   };
 
   const uploadFiles = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const token = localStorage.getItem("authToken");
+  const authTokenValue = (() => {
+    try {
+      return token ? JSON.parse(token) : null;
+    } catch {
+      return token;
+    }
+  })();
+
+  const headers = {
+    Authorization: authTokenValue ? `Bearer ${authTokenValue}` : "",
+  };
     if (mode > 2) return;
     const { files } = e.target;
     if (!files || files.length === 0) return;
@@ -134,7 +146,7 @@ export const Projects_AddForm: React.FC<ProjectsAddFormProps> = ({
       const fd = new FormData();
       fd.append("file", files[i]);
       fd.append("module", formData.projectType || "Solar");
-      if (mode !== 1 && formData.id) fd.append("entityId", formData.id);
+       fd.append("entityId", "");
 
       try {
         const res = await axios.post(
@@ -145,11 +157,11 @@ export const Projects_AddForm: React.FC<ProjectsAddFormProps> = ({
 
         if (res.data) {
           fileArr.push({
-            fileId: res.data.id,
+            fileId: res.data.data.id,
             fileNm: files[i].name,
-            fileUri: res.data.fileUrl,
+            fileUri: res?.data.data.fileUrl,
           });
-          setFormData((prev) => ({ ...prev, imageUrl: res.data.fileUrl }));
+          setFormData((prev) => ({ ...prev, imageUrl:  res?.data.data.fileUrl }));
         }
       } catch (err) {
         console.error(err);
@@ -167,6 +179,9 @@ export const Projects_AddForm: React.FC<ProjectsAddFormProps> = ({
   };
 
   const delete_file = async (i: number) => {
+          const headers = {
+    Authorization: authToken ? `Bearer ${authToken}` : "",
+  };
     if (!doc[i]?.fileId) return;
     if (!confirm("Are you sure? File cannot be recovered once deleted!")) return;
 
@@ -182,32 +197,51 @@ export const Projects_AddForm: React.FC<ProjectsAddFormProps> = ({
     }
   };
 
-  const handleDownload = async (fileUri: string) => {
-    const fileId = extractFileId(fileUri);
-    if (!fileId) return;
+const handleDownload = async (fileUri: string) => {
+  const token = localStorage.getItem("authToken");
+  const authTokenValue = (() => {
+    try { return token ? JSON.parse(token) : null; } catch { return token; }
+  })();
 
-    try {
-      const res = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/files/download/${fileId}`,
-        { headers, responseType: "blob" }
-      );
-
-      const url = window.URL.createObjectURL(new Blob([res.data]));
-      const link = document.createElement("a");
-      link.href = url;
-      link.setAttribute("download", fileId);
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-    } catch (err) {
-      console.error(err);
-      setMsg("File download failed!");
-      setMsgTyp("error");
-    }
+  const headers = {
+    Authorization: authTokenValue ? `Bearer ${authTokenValue}` : "",
   };
 
+  const fileId = extractFileId(fileUri);
+  if (!fileId) return;
+
+  try {
+    const res = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/files/download/${fileId}`,
+      { headers, responseType: "blob" }
+    );
+
+    const url = window.URL.createObjectURL(new Blob([res.data]));
+
+    const link = document.createElement("a");
+    link.href = url;
+
+    // Use original file name from URI
+    const fileName = fileUri.split("/").pop() || fileId; // gets "9406ce28-29f4-4ba2-ada9-720602c5c1c1_AgriBlogStandard.jpg"
+    link.setAttribute("download", fileName);
+
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+  } catch (err) {
+    console.error(err);
+    setMsg("File download failed!");
+    setMsgTyp("error");
+  }
+};
+
+
   const handleSubmit = async (e: React.FormEvent) => {
+
     e.preventDefault();
+          const headers = {
+    Authorization: authToken ? `Bearer ${authToken}` : "",
+  };
     try {
       if (!authToken) {
         setMsg("User not authenticated!");
@@ -218,15 +252,15 @@ export const Projects_AddForm: React.FC<ProjectsAddFormProps> = ({
       if (mode === 1) {
         await axios.post(
           `${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/manage/projects`,
-          { ...formData, files: doc },
+          { ...formData },
           { headers }
         );
         setMsg("Project added successfully!");
         setMsgTyp("success");
-      } else if (mode === 2 && formData.id) {
+      } else if (mode === 2) {
         await axios.put(
           `${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/manage/projects/${formData.id}`,
-          { ...formData, files: doc },
+          { ...formData },
           { headers }
         );
         setMsg("Project updated successfully!");
@@ -238,7 +272,7 @@ export const Projects_AddForm: React.FC<ProjectsAddFormProps> = ({
 
       fetchTableData();
       if (mode === 1) resetForm();
-      if (onClose) onClose();
+      // if (onClose) onClose();
     } catch (error) {
       console.error(error);
       setMsg("Something went wrong!");
@@ -247,6 +281,9 @@ export const Projects_AddForm: React.FC<ProjectsAddFormProps> = ({
   };
 
   const handleDelete = async () => {
+          const headers = {
+    Authorization: authToken ? `Bearer ${authToken}` : "",
+  };
     if (!formData.id) return;
     try {
       await axios.delete(
@@ -256,8 +293,8 @@ export const Projects_AddForm: React.FC<ProjectsAddFormProps> = ({
       setMsg("Project deleted successfully!");
       setMsgTyp("success");
       fetchTableData();
-      set_open(false);
-      if (onClose) onClose();
+      // set_open(false);
+      // if (onClose) onClose();
     } catch (err) {
       console.error(err);
       setMsg("Failed to delete project!");
@@ -295,7 +332,14 @@ export const Projects_AddForm: React.FC<ProjectsAddFormProps> = ({
 
   return (
     <div className="container">
-      {msg && <div ref={msgRef}>{msg}</div>}
+      {msg && (
+  <div
+    ref={msgRef}
+    style={{ color: msgTyp === "success" ? "green" : "red" }}
+  >
+    {msg}
+  </div>
+)}
       <h4 className="card-title mb-4">{getFormTitle()}</h4>
 
       <form onSubmit={handleSubmit}>
@@ -313,8 +357,8 @@ export const Projects_AddForm: React.FC<ProjectsAddFormProps> = ({
             >
               <option value="">Select</option>
               <option value="SOLAR">SOLAR</option>
-              <option value="WIND">WIND</option>
-              <option value="HYDRO">HYDRO</option>
+              <option value="CIVIL">CIVIL</option>
+              <option value="AGRICULTURE">AGRICULTURE</option>
             </select>
           </div>
         </div>
@@ -424,35 +468,41 @@ export const Projects_AddForm: React.FC<ProjectsAddFormProps> = ({
               style={{ display: mode > 2 ? "none" : "block" }}
             />
             {fileErr_msg && <p style={{ color: "red" }}>{fileErr_msg}</p>}
-            {doc.map((file, i) => (
-              <div key={i} className="d-flex align-items-center my-1">
-                <a href={file.fileUri} target="_blank" rel="noreferrer">
-                  {file.fileNm}
-                </a>
-                {mode < 3 && (
-                  <>
-                    <Button
-                      variant="danger"
-                      size="sm"
-                      onClick={() => delete_file(i)}
-                      className="ms-2"
-                    >
-                      <Delete />
-                    </Button>
-
-                    <Button
-                      type="button"
-                      variant="success"
-                      size="sm"
-                      className="ms-2"
-                      onClick={() => handleDownload(file.fileUri)}
-                    >
-                      <Download />
-                    </Button>
-                  </>
-                )}
-              </div>
-            ))}
+            {doc.map((file, i) => {
+              const fullFileUrl = file.fileUri;
+            
+              return (
+                <div key={i} className="d-flex align-items-center my-1">
+                  <a href={fullFileUrl} target="_blank" rel="noreferrer">
+                    {file.fileNm}
+                  </a>
+                  {mode !== 3 && (
+                    <>
+                      {mode < 3 && (
+                        <Button
+                          variant="danger"
+                          size="sm"
+                          onClick={() => delete_file(i)}
+                          className="ms-2"
+                        >
+                          <Delete />
+                        </Button>
+                      )}
+            
+                      <Button
+                        type="button"
+                        variant="success"
+                        size="sm"
+                        className="ms-2"
+                        onClick={() => handleDownload(fullFileUrl)}
+                      >
+                        <Download />
+                      </Button>
+                    </>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
 

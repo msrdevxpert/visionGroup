@@ -17,7 +17,7 @@ export default function Topbar({ fullName, toggleSidebar }: TopbarProps) {
 
       // Call logout API
       await fetch(
-        "https://visiongreen-production.up.railway.app/api/v1/auth/logout",
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/logout`,
         {
           method: "POST",
           headers: {
@@ -30,12 +30,12 @@ export default function Topbar({ fullName, toggleSidebar }: TopbarProps) {
       localStorage.removeItem("authToken");
       localStorage.removeItem("authLogin");
 
-      router.push("/sign-in");
+      router.replace("/sign-in");
     } catch (error) {
       console.error("Logout failed:", error);
       localStorage.removeItem("authToken");
       localStorage.removeItem("authLogin");
-      router.push("/login");
+      router.replace("/sign-in");
     }
   };
 

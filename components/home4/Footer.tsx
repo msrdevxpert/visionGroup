@@ -14,7 +14,7 @@ const Footer = () => {
 
     try {
       const res = await fetch(
-        "https://visiongreen-production.up.railway.app/api/v1/newsletter/subscribe",
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/newsletter/subscribe`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

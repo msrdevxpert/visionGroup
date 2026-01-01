@@ -154,7 +154,7 @@ setProjects(sortedProjects);
     src={project.imageUrl}
     width={600}
     height={400}
-    className="img-fluid"
+    className="img-fluidd"
     alt={project.title}
   />
 

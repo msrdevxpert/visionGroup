@@ -51,7 +51,7 @@ export default function ServicesAdmin() {
   }>({ open: false, mode: 0, rowData: null });
 
   const API =
-    "https://visiongreen-production.up.railway.app/api/v1/unified/services";
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/unified/services`;
 
   // ===== LOAD DATA =========
   const loadData = async () => {

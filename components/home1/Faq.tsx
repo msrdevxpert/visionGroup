@@ -48,6 +48,68 @@ const Faq = ({ faqImg, type  }: FaqProps) => {
     fetchFaqs();
   }, []);
 
+const [sending, setSending] = useState(false);
+const [success, setSuccess] = useState(false);
+const [error, setError] = useState("");
+
+const [form, setForm] = useState({
+  name: "",
+  email: "",
+  phone: "",
+  message: "",
+  subject: "Contact from FAQ",
+});
+
+const handleChange = (
+  e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+) => {
+  setForm({ ...form, [e.target.name]: e.target.value });
+};
+
+const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+  setSending(true);
+  setSuccess(false);
+  setError("");
+
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/contact/submit`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      }
+    );
+
+    if (!res.ok) throw new Error("Something went wrong");
+
+    setSuccess(true);
+
+    // clear form
+    setForm({
+      name: "",
+      email: "",
+      phone: "",
+      message: "",
+      subject: "Contact from FAQ",
+    });
+  } catch (err) {
+    setError("Failed to send. Please try again.");
+  } finally {
+    setSending(false);
+  }
+};
+
+
+useEffect(() => {
+  if (success) {
+    const timer = setTimeout(() => setSuccess(false), 30000);
+    return () => clearTimeout(timer);
+  }
+}, [success]);
+
+
   return (
     <section className="faq faq-home"   style={
     faqImg
@@ -67,47 +129,98 @@ const Faq = ({ faqImg, type  }: FaqProps) => {
           {/* LEFT FORM */}
           <div className="col-lg-6 col-xxl-5">
             <div>
-              <form id="contact-form">
-                <h3 className="fade_up_anim">Get in touch with us.</h3>
-                <p className="mb-3 mb-xl-4 fade_up_anim" data-delay=".3">
-                  Fill up the form &amp; our team will get back to you within hours.
-                </p>
+             <form id="contact-form" onSubmit={handleSubmit}>
+  <h3 className="fade_up_anim">Get in touch with us.</h3>
+  <p className="mb-3 mb-xl-4 fade_up_anim" data-delay=".3">
+    Fill up the form &amp; our team will get back to you within hours.
+  </p>
 
-                <div className="row g-3 g-lg-4">
-                  
-                  <div className="col-md-6">
-                    <label htmlFor="name">Name</label>
-                    <input className="solarox-input" name="user_name" type="text" id="name" placeholder="Enter Your Name..." required />
-                  </div>
+  <div className="row g-3 g-lg-4">
 
-                  <div className="col-md-6">
-                    <label htmlFor="email">Email</label>
-                    <input className="solarox-input" name="user_email" type="email" id="email" placeholder="Enter Your Email..." required />
-                  </div>
+    <div className="col-md-6">
+      <label htmlFor="name">Name</label>
+      <input
+        className="solarox-input"
+        type="text"
+        id="name"
+        name="name"
+        value={form.name}
+        onChange={handleChange}
+        placeholder="Enter Your Name..."
+        required
+      />
+    </div>
 
-                  <div className="col-md-6">
-                    <label htmlFor="phone">Phone</label>
-                    <input className="solarox-input" name="contact_number" type="number" id="phone" placeholder="Enter Your Phone..." required />
-                  </div>
+    <div className="col-md-6">
+      <label htmlFor="email">Email</label>
+      <input
+        className="solarox-input"
+        type="email"
+        id="email"
+        name="email"
+        value={form.email}
+        onChange={handleChange}
+        placeholder="Enter Your Email..."
+        required
+      />
+    </div>
 
-                  <div className="col-md-6">
-                    <label htmlFor="country">Country</label>
-                    <RSelect options={options} />
-                  </div>
+    <div className="col-md-6">
+      <label htmlFor="phone">Phone</label>
+      <input
+        className="solarox-input"
+        type="number"
+        id="phone"
+        name="phone"
+        value={form.phone}
+        onChange={handleChange}
+        placeholder="Enter Your Phone..."
+        required
+      />
+    </div>
 
-                  <div className="col-12">
-                    <label htmlFor="message">Message</label>
-                    <textarea placeholder="Enter Your Message..." name="message" id="message" className="solarox-input" rows={5} required></textarea>
-                  </div>
+    {/* subject (hidden — default value) */}
+    <input type="hidden" name="subject" value={form.subject} />
 
-                  <div className="col-12">
-                    <button type="submit" className="primary-btn" id="submit-btn">
-                      Send Message <i className="ti ti-arrow-up-right"></i>
-                    </button>
-                  </div>
+    <div className="col-12">
+      <label htmlFor="message">Message</label>
+      <textarea
+        placeholder="Enter Your Message..."
+        name="message"
+        id="message"
+        className="solarox-input"
+        rows={5}
+        value={form.message}
+        onChange={handleChange}
+        required
+      />
+    </div>
 
-                </div>
-              </form>
+    <div className="col-12 d-flex align-items-center gap-2">
+      <button
+        type="submit"
+        className="primary-btn d-flex align-items-center gap-2"
+        id="submit-btn"
+        disabled={sending}
+      >
+        {sending ? "Sending..." : "Send Message"}
+        <i className="ti ti-arrow-up-right"></i>
+      </button>
+
+      {success && (
+       <span className="tick-anim" style={{ color: "green", fontWeight: 600 }}>
+  ✔ Sent!
+</span>
+
+      )}
+
+      {error && (
+        <span style={{ color: "red", fontWeight: 500 }}>{error}</span>
+      )}
+    </div>
+  </div>
+</form>
+
             </div>
           </div>
 

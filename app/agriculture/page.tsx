@@ -8,6 +8,30 @@ import ProjectShowcase from "@/components/home4/ProjectShowcase";
 import Services from "@/components/home4/Services";
 import Testimonial from "@/components/home4/Testimonial";
 import Navbar from "@/components/home4/NavBar";
+import Partners from "@/components/home1/Partners";
+
+
+export const metadata = {
+  title: "VISION AGRIFUTURE | Smart Agriculture & Sustainable Farming Solutions",
+  description:
+    "VISION AGRIFUTURE delivers innovative agritech solutions, modern farming practices, irrigation systems, and sustainable agriculture services to help farmers increase productivity and profitability.",
+  keywords: [
+    "VISION AGRIFUTURE",
+    "agriculture technology",
+    "smart farming",
+    "sustainable farming",
+    "agritech solutions",
+    "irrigation systems",
+    "organic farming",
+    "modern agriculture"
+  ],
+  openGraph: {
+    title: "VISION AGRIFUTURE — Smart & Sustainable Agriculture Solutions",
+    description:
+      "Empowering farmers with technology-driven, eco-friendly and profitable agriculture practices.",
+    type: "website"
+  }
+};
 
 const HomeFour = () => {
   return (
@@ -21,6 +45,7 @@ const HomeFour = () => {
       <Experts />
       <Faq faqImg="/images/AgriHomefaq.jpg"/>
       <News />
+      <Partners />
       <Footer />
     </>
   );

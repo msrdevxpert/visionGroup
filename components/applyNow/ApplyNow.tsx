@@ -37,7 +37,7 @@ const ApplyNowForm = () => {
 
     try {
       const res = await fetch(
-        "https://visiongreen-production.up.railway.app/api/v1/job-applications",
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/job-applications`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

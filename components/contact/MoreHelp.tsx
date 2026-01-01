@@ -16,8 +16,8 @@ const MoreHelp = () => {
               <i className="ti ti-phone-call"></i>
               <h4 className="mb-3">Call Now</h4>
               <div className="d-flex flex-column gap-1">
-                <a href="tel:9075550101">(907) 555-0101</a>
-                <a href="tel:9075550101">(907) 555-0101</a>
+                <a href="tel:7601955124">(+91) 7601955124</a>
+                {/* <a href="tel:9075550101">(907) 555-0101</a> */}
               </div>
             </div>
           </div>
@@ -26,8 +26,8 @@ const MoreHelp = () => {
               <i className="ti ti-mail-opened"></i>
               <h4 className="mb-3">Email Address</h4>
               <div className="d-flex flex-column gap-1">
-                <a href="mailto:info@example.com">info@example.com</a>
-                <a href="mailto:info@example.com">info@example.com</a>
+                <a href="mailto:info@groupvision.co.in">http://www.info@groupvision.co.in</a>
+                {/* <a href="mailto:info@example.com">info@example.com</a> */}
               </div>
             </div>
           </div>
@@ -36,8 +36,8 @@ const MoreHelp = () => {
               <i className="ti ti-map-pin-pin"></i>
               <h4 className="mb-3">Location</h4>
               <div className="d-flex flex-column gap-1">
-                <span>Royal Ln. Mesa, New Jersey 45463</span>
-                <span>Thornridge Cir. Shiloh, Hawaii 81063</span>
+                <span>Plot No.676/3326, 4th Floor, South Side,mouza-lingipur</span>
+                <span>Sisupalgarh, Khorda, Lingaraj, Orissa, India, 751 002</span>
               </div>
             </div>
           </div>

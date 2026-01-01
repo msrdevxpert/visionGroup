@@ -12,7 +12,7 @@ type CareerPageProps = {
 // ✅ Generate static params for SSG
 export async function generateStaticParams() {
   const res = await fetch(
-    "https://visiongreen-production.up.railway.app/api/v1/careers"
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/careers`
   );
   const careers = await res.json();
 

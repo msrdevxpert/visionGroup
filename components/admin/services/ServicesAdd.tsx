@@ -86,9 +86,9 @@ export const Services_AddForm: React.FC<ServicesAddFormProps> = ({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-  setHeaders({
-        Authorization: authToken ? `Bearer ${authToken}` : "",
-      });
+   const headers = {
+    Authorization: authToken ? `Bearer ${authToken}` : "",
+  };
     try {
       // ADD
       if (mode === 1) {
@@ -102,7 +102,7 @@ export const Services_AddForm: React.FC<ServicesAddFormProps> = ({
       }
 
       // EDIT
-      else if (mode === 2 && formData.id) {
+      else if (mode === 2 ) {
         await axios.put(
           `${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/manage/services/${formData.id}`,
           formData,
@@ -120,7 +120,7 @@ export const Services_AddForm: React.FC<ServicesAddFormProps> = ({
 
       fetchTableData();
       if (mode === 1) resetForm();
-      if (onClose) onClose();
+      // if (onClose) onClose();
     } catch (err) {
       console.error(err);
       setMsg("Something went wrong!");
@@ -129,6 +129,9 @@ export const Services_AddForm: React.FC<ServicesAddFormProps> = ({
   };
 
   const handleDelete = async () => {
+          const headers = {
+    Authorization: authToken ? `Bearer ${authToken}` : "",
+  };
     if (!formData.id) return;
 
     try {
@@ -140,8 +143,8 @@ export const Services_AddForm: React.FC<ServicesAddFormProps> = ({
       setMsg("Service deleted successfully!");
       setMsgTyp("success");
       fetchTableData();
-      set_open(false);
-      if (onClose) onClose();
+      // set_open(false);
+      // if (onClose) onClose();
     } catch (err) {
       console.error(err);
       setMsg("Failed to delete service!");
@@ -179,7 +182,14 @@ export const Services_AddForm: React.FC<ServicesAddFormProps> = ({
 
   return (
     <div className="container">
-      {msg && <div ref={msgRef}>{msg}</div>}
+       {msg && (
+  <div
+    ref={msgRef}
+    style={{ color: msgTyp === "success" ? "green" : "red" }}
+  >
+    {msg}
+  </div>
+)}
 
       <h4 className="card-title mb-4">{getFormTitle()}</h4>
 
@@ -198,8 +208,8 @@ export const Services_AddForm: React.FC<ServicesAddFormProps> = ({
             >
               <option value="">Select</option>
               <option value="SOLAR">SOLAR</option>
-              <option value="WIND">WIND</option>
-              <option value="HYDRO">HYDRO</option>
+              <option value="CIVIL">CIVIL</option>
+              <option value="AGRICULTURE">AGRICULTURE</option>
             </select>
           </div>
         </div>

@@ -30,6 +30,7 @@ export default function Dashboard() {
   useEffect(() => {
     const tokenStr = localStorage.getItem("authLogin");
     if (tokenStr) setAuthToken(JSON.parse(tokenStr));
+    
   }, []);
 
   // Fetch dashboard stats only if token exists

@@ -98,7 +98,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, logo }: Props) => {
                   className="w-100"
                   width={98}
                   height={98}
-                  src={item.mediaUrl}
+                   src={item.mediaUrl || "placeholder.jpg"}
                   alt={item.title || "Gallery Image"}
                 />
               </div>

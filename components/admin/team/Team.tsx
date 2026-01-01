@@ -55,7 +55,7 @@ export default function TeamAdmin() {
   }>({ open: false, mode: 0, rowData: null });
 
   const GET_API =
-    "https://visiongreen-production.up.railway.app/api/v1/team";
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/team`;
 
   // ========= LOAD DATA =========
   const loadData = async () => {

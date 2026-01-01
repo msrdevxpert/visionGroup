@@ -11,7 +11,35 @@ import WhyChoose from "@/components/home1/WhyChoose";
 import CompanyProf from "@/components/home1/CompanyProf";
 import Navbar from "@/components/shared/Navbar";
 import Client from "@/components/home1/Clients"
+import Partners from "@/components/home1/Partners";
 
+export const metadata = {
+  title: "Home | Vision Originn",
+  description: "Vision Originn provides expert services, innovative solutions, and trusted partnerships.",
+  keywords: [
+    "Vision Originn",
+    "business services",
+    "consulting",
+    "experts",
+    "projects"
+  ],
+  openGraph: {
+    title: "Vision Originn",
+    description: "Expert services and innovative solutions by Vision Originn",
+    url: "https://visionoriginn.com/",
+    siteName: "Vision Originn",
+    images: [
+      {
+        url: "/images/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Vision Originn",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+};
 
 export default function Home() {
 
@@ -28,6 +56,7 @@ export default function Home() {
       <Testimonial bgImage="/images/imageTestomonials.png"/>
       <Client />
       <Faq faqImg="/images/VisionGroupFAQBG.png" type="main"/>
+      <Partners />
       <Footer />
     </>
   );

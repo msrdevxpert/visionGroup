@@ -18,7 +18,7 @@ const About = () => {
   const [stats, setStats] = useState<Stats | null>(null);
 
   useEffect(() => {
-    fetch("https://visiongreen-production.up.railway.app/api/v1/statistics/company", {
+    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/statistics/company`, {
       cache: "no-store",
     })
       .then((res) => res.json())

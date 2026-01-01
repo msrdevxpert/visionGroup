@@ -52,7 +52,7 @@ const Team_AddForm: React.FC<Props> = ({ mode, teamData, fetchTableData, onClose
       }
        setHeaders({Authorization: authToken ? `Bearer ${authToken}` : "",})
     }, []);
-    
+
   const [formData, setFormData] = useState<Team>({
     memberId: 0,
     fullName: "",
@@ -96,15 +96,21 @@ const Team_AddForm: React.FC<Props> = ({ mode, teamData, fetchTableData, onClose
         createdAt: teamData.createdAt || new Date().toISOString(),
       });
 
-      if (teamData.photoUrl) {
-        set_doc([
-          {
-            fileId: teamData.memberId?.toString() || "temp-id",
-            fileNm: teamData.photoUrl.split("/").pop() || "photo.jpg",
-            fileUri: teamData.photoUrl,
-          },
-        ]);
-      }
+   if (teamData.photoUrl) {
+  const lastPart = teamData.photoUrl.split("/").pop() || "";
+
+  const [fileId, ...rest] = lastPart.split("_");
+  const fileNm = rest.join("_");
+
+  set_doc([
+    {
+      fileId: fileId || "temp-id",
+      fileNm: fileNm || lastPart,
+      fileUri: teamData.photoUrl,
+    },
+  ]);
+}
+
     }
   }, [mode, teamData]);
 
@@ -142,6 +148,16 @@ const Team_AddForm: React.FC<Props> = ({ mode, teamData, fetchTableData, onClose
 
   // ---------- File Upload ----------
   const uploadFiles = async (e: React.ChangeEvent<HTMLInputElement>) => {
+     const token = localStorage.getItem("authToken");
+  const parsedToken = (() => {
+    if (!token) return null;
+    try { return JSON.parse(token); } 
+    catch { return token; }
+  })();
+
+  const headers = {
+    Authorization: parsedToken ? `Bearer ${parsedToken}` : "",
+  };
     if (mode > 2) return;
     const { files } = e.target;
     if (!files || files.length === 0) return;
@@ -157,7 +173,7 @@ const Team_AddForm: React.FC<Props> = ({ mode, teamData, fetchTableData, onClose
       const fd = new FormData();
       fd.append("file", files[i]);
       fd.append("module", "TEAM");
-      if (mode !== 1 && formData.memberId) fd.append("entityId", formData.memberId.toString());
+      if (mode !== 1 && formData.memberId) fd.append("entityId","");
 
       try {
         const res = await axios.post(
@@ -170,12 +186,12 @@ const Team_AddForm: React.FC<Props> = ({ mode, teamData, fetchTableData, onClose
           fileArr.push({
             fileId: res.data.data.id,
             fileNm: files[i].name,
-            fileUri: res.data.data.fileUrl,
+            fileUri:  res?.data.data.fileUrl,
           });
 
           setFormData((prev) => ({
             ...prev,
-            photoUrl: res.data.data.fileUrl,
+            photoUrl:  res?.data.data.fileUrl,
           }));
         }
       } catch (err) {
@@ -193,79 +209,161 @@ const Team_AddForm: React.FC<Props> = ({ mode, teamData, fetchTableData, onClose
     return name.split("_")[0];
   };
 
-  const handleDownload = async (fileUri: string) => {
-    const fileId = extractFileId(fileUri);
-    if (!fileId) return;
+const handleDownload = async (fileUri: string) => {
+  const token = localStorage.getItem("authToken");
+  const authTokenValue = (() => {
+    try { return token ? JSON.parse(token) : null; } catch { return token; }
+  })();
 
-    try {
-      const res = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/files/download/${fileId}`,
-        { headers, responseType: "blob" }
-      );
-      const url = window.URL.createObjectURL(new Blob([res.data]));
-      const link = document.createElement("a");
-      link.href = url;
-      link.setAttribute("download", fileId);
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-    } catch (err) {
-      console.error(err);
-      setMsg("File download failed!");
-      setMsgTyp("error");
-    }
+  const headers = {
+    Authorization: authTokenValue ? `Bearer ${authTokenValue}` : "",
   };
 
-  const delete_file = async (i: number) => {
-    if (!doc[i]?.fileId) return;
-    if (!confirm("Are you sure? File cannot be recovered once deleted!")) return;
+  const fileId = extractFileId(fileUri);
+  if (!fileId) return;
 
-    try {
-      await axios.delete(`${process.env.NEXT_PUBLIC_API_BASE_URL}/files/${doc[i].fileId}`, { headers });
-      set_doc(doc.filter((_, idx) => idx !== i));
-    } catch (err) {
-      console.error(err);
-      set_fileErr_msg("Failed to delete file");
-    }
+  try {
+    const res = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/files/download/${fileId}`,
+      { headers, responseType: "blob" }
+    );
+
+    const url = window.URL.createObjectURL(new Blob([res.data]));
+
+    const link = document.createElement("a");
+    link.href = url;
+
+    // Use original file name from URI
+    const fileName = fileUri.split("/").pop() || fileId; // gets "9406ce28-29f4-4ba2-ada9-720602c5c1c1_AgriBlogStandard.jpg"
+    link.setAttribute("download", fileName);
+
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+  } catch (err) {
+    console.error(err);
+    setMsg("File download failed!");
+    setMsgTyp("error");
+  }
+};
+
+
+const delete_file = async (i: number) => {
+  const token = localStorage.getItem("authToken");
+  const parsedToken = (() => {
+    try { return token ? JSON.parse(token) : null; } catch { return token; }
+  })();
+
+  const headers = {
+    Authorization: parsedToken ? `Bearer ${parsedToken}` : "",
   };
+
+  const fileUri = doc[i]?.fileUri;
+  if (!fileUri) return;
+
+  const fileId = extractFileId(fileUri);
+  if (!fileId) return;
+
+  if (!confirm("Are you sure? File cannot be recovered once deleted!")) return;
+
+  try {
+    await axios.delete(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/files/${fileId}`,
+      { headers }
+    );
+
+    set_doc((prev) => prev.filter((_, idx) => idx !== i));
+  } catch (err) {
+    console.error(err);
+    set_fileErr_msg("Failed to delete file");
+  }
+};
+useEffect(() => {
+  console.log("DOC UPDATED =>", doc);
+}, [doc]);
+
+console.log(formData);
 
   // ---------- Submit ----------
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
 
+  const token = localStorage.getItem("authToken");
+  const parsedToken = (() => {
+    if (!token) return null;
     try {
-      if (mode === 1) {
-        await axios.post(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/manage/teams`,
-          { ...formData, files: doc },
-          { headers }
-        );
-        setMsg("Team added successfully!");
-        setMsgTyp("success");
-        resetForm();
-      } else if (mode === 2 && formData.memberId) {
-        await axios.put(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/manage/teams/${formData.memberId}`,
-          { ...formData, files: doc },
-          { headers }
-        );
-        setMsg("Team updated successfully!");
-        setMsgTyp("success");
-      } else if (mode === 3) {
-        set_open(true);
-        return;
-      }
-
-      fetchTableData();
-      onClose?.();
-    } catch (err) {
-      console.error(err);
-      setMsg("Something went wrong!");
-      setMsgTyp("error");
+      return JSON.parse(token);
+    } catch {
+      return token;
     }
+  })();
+
+  const headers = {
+    Authorization: parsedToken ? `Bearer ${parsedToken}` : "",
+    // "Content-Type": "application/json",
+    // Accept: "application/json",
   };
 
+  const payload = {
+    ...formData,
+    memberId: Number(formData.memberId) || 0,
+    displayOrder: Number(formData.displayOrder) || 0,
+  };
+
+  // ❌ do NOT send createdAt
+  // delete (payload as any).createdAt;
+
+  try {
+    if (mode === 1) {
+      // CREATE
+      await axios.post(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/manage/team`,
+        payload,
+        { headers }
+      );
+
+      setMsg("Team added successfully!");
+      setMsgTyp("success");
+      resetForm();
+    }
+
+    else if (mode === 2) {
+      // UPDATE
+      await axios.put(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/manage/team/${formData.memberId}`,
+        payload,
+        { headers }
+      );
+
+      setMsg("Team updated successfully!");
+      setMsgTyp("success");
+    }
+
+    else if (mode === 3) {
+      set_open(true);
+      return;
+    }
+
+    fetchTableData();
+  } catch (err) {
+    console.error(err);
+    setMsg("Something went wrong!");
+    setMsgTyp("error");
+  }
+};
+
+
   const handleDelete = async () => {
+          const token = localStorage.getItem("authToken");
+  const parsedToken = (() => {
+    if (!token) return null;
+    try { return JSON.parse(token); } 
+    catch { return token; }
+  })();
+
+  const headers = {
+    Authorization: parsedToken ? `Bearer ${parsedToken}` : "",
+  };
     if (!formData.memberId) return;
     try {
       await axios.delete(
@@ -275,8 +373,8 @@ const Team_AddForm: React.FC<Props> = ({ mode, teamData, fetchTableData, onClose
       setMsg("Team deleted successfully!");
       setMsgTyp("success");
       fetchTableData();
-      set_open(false);
-      onClose?.();
+      // set_open(false);
+      // onClose?.();
     } catch (err) {
       console.error(err);
       setMsg("Failed to delete team!");
@@ -327,6 +425,21 @@ const Team_AddForm: React.FC<Props> = ({ mode, teamData, fetchTableData, onClose
               type="text"
               name="fullName"
               value={formData.fullName}
+              onChange={handleInputChange}
+              className="form-control"
+              disabled={mode >= 3}
+              required
+            />
+          </div>
+        </div>
+        {/* Member Id */}
+        <div className="row mb-3">
+          <label className="col-md-3 form-label">Member Id:</label>
+          <div className="col-md-8">
+            <input
+              type="number"
+              name="memberId"
+              value={formData.memberId}
               onChange={handleInputChange}
               className="form-control"
               disabled={mode >= 3}
@@ -473,25 +586,41 @@ const Team_AddForm: React.FC<Props> = ({ mode, teamData, fetchTableData, onClose
           <div className="col-md-8">
             {mode <= 2 && <input type="file" onChange={uploadFiles} />}
             {fileErr_msg && <p style={{ color: "red" }}>{fileErr_msg}</p>}
-            {doc.map((file, i) => (
-              <div key={i} className="d-flex align-items-center my-1">
-                <a href={file.fileUri} target="_blank" rel="noreferrer">
-                  {file.fileNm}
-                </a>
-
-                {mode < 3 && (
-                  <>
-                    <Button variant="danger" size="sm" className="ms-2" onClick={() => delete_file(i)}>
-                      <Delete />
-                    </Button>
-
-                    <Button variant="success" size="sm" className="ms-2" onClick={() => handleDownload(file.fileUri)}>
-                      <Download />
-                    </Button>
-                  </>
-                )}
-              </div>
-            ))}
+            {doc.map((file, i) => {
+              const fullFileUrl = file.fileUri;
+            
+              return (
+                <div key={i} className="d-flex align-items-center my-1">
+                  <a href={fullFileUrl} target="_blank" rel="noreferrer">
+                    {file.fileNm}
+                  </a>
+                  {mode !== 3 && (
+                    <>
+                      {mode < 3 && (
+                        <Button
+                          variant="danger"
+                          size="sm"
+                          onClick={() => delete_file(i)}
+                          className="ms-2"
+                        >
+                          <Delete />
+                        </Button>
+                      )}
+            
+                      <Button
+                        type="button"
+                        variant="success"
+                        size="sm"
+                        className="ms-2"
+                        onClick={() => handleDownload(fullFileUrl)}
+                      >
+                        <Download />
+                      </Button>
+                    </>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
 

@@ -93,7 +93,7 @@ const CompanyProfile = () => {
             <SwiperSlide key={item.id}>
               <div className="service-card">
                 <Image
-                  src={item.image}
+                  src={item.image || "Company Profile image"}
                   alt={item.title}
                   width={400}
                   height={300}

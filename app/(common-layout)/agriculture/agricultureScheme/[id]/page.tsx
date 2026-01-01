@@ -5,7 +5,7 @@ import Navbar from "@/components/home4/NavBar";
 
 export async function generateStaticParams() {
   const res = await fetch(
-    "https://visiongreen-production.up.railway.app/api/v1/agriculture/schemes"
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/agriculture/schemes`
   );
 
   const data = await res.json();
@@ -15,20 +15,15 @@ export async function generateStaticParams() {
   }));
 }
 
-export default function AgricultureSchemeDetailsPage(props: any) {
-  const { params } = props as { params: { id: string } };
-
+const AgricultureSchemeDetailsPage = () => {
   return (
     <>
       <Navbar />
-      <Banner
-        title="Agriculture Scheme Details"
-        bgImage="SchemeDetailsBanner.jpg"
-      />
-
-      <AgricultureSchemeDetails id={params.id} />
-
+      <Banner title="Agriculture Scheme Details" bgImage="SchemeDetailsBanner.jpg" />
+      <AgricultureSchemeDetails />
       <BrandSlider />
     </>
   );
-}
+};
+
+export default AgricultureSchemeDetailsPage;

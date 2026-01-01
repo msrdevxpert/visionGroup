@@ -52,7 +52,7 @@ export default function UsersAdmin() {
   }>({ open: false, mode: 0, rowData: null });
 
   const API =
-    "https://visiongreen-production.up.railway.app/api/v1/admin/users";
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/users`;
 
   // ===== LOAD DATA (WITH TOKEN) =====
   const loadData = async () => {

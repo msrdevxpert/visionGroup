@@ -11,9 +11,27 @@ const interFont = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Solarox - Solar and Renewable Energy NextJS Bootstrap Template",
-  description: "Solarox - Solar and Renewable Energy NextJS Bootstrap Template",
+  title: "Vision Originn — Renewable Energy, Agriculture & Infrastructure",
+  description:
+    "Vision Originn delivers sustainable renewable energy solutions, smart agriculture technology, and reliable civil infrastructure services — building a greener and stronger future.",
+  keywords: [
+    "Vision Originn",
+    "renewable energy",
+    "solar solutions",
+    "agriculture technology",
+    "infrastructure development",
+    "green energy",
+    "sustainability",
+    "Vision Originn"
+  ],
+  openGraph: {
+    title: "Vision Group — Building a Sustainable Future",
+    description:
+      "We provide innovative renewable energy, agriculture, and infrastructure solutions focused on sustainability and performance.",
+    type: "website"
+  }
 };
+
 
 export default function RootLayout({
   children,
@@ -21,7 +39,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${interFont.className}`}>
         <Bootstrap>
           {/* <Loader /> */}

@@ -1,5 +1,6 @@
 "use client";
 
+import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 type AgricultureScheme = {
@@ -11,7 +12,9 @@ type AgricultureScheme = {
   createdAt: string;
 };
 
-const AgricultureSchemeDetails = ({ id }: { id: string }) => {
+const AgricultureSchemeDetails = () => {
+  const { id } = useParams<{ id: string }>();
+
   const [scheme, setScheme] = useState<AgricultureScheme | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -31,14 +34,12 @@ const AgricultureSchemeDetails = ({ id }: { id: string }) => {
 
   if (loading) return <p className="text-center pt-120">Loading...</p>;
 
-  if (!scheme)
-    return <p className="text-center pt-120">No scheme found</p>;
+  if (!scheme) return <p className="text-center pt-120">No scheme found</p>;
 
   return (
     <section className="pt-120 pb-120">
       <div className="container">
         <div className="bg-white p-4 p-lg-5 rounded shadow-sm">
-
           <span className="text-sm text-muted">
             Published on{" "}
             {new Date(scheme.createdAt).toLocaleDateString("en-GB")}
@@ -57,7 +58,6 @@ const AgricultureSchemeDetails = ({ id }: { id: string }) => {
             <h5>Subsidy Details</h5>
             <p>{scheme.subsidyDetails}</p>
           </div>
-
         </div>
       </div>
     </section>

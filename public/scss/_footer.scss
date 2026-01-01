@@ -75,6 +75,7 @@
   }
   .cta {
     padding: 30px;
+    background-image: url(/images/output-onlinepngtools.png);
     @include screen(sm) {
       padding: 40px;
     }
@@ -94,7 +95,7 @@
     }
     margin-bottom: 60px;
     @include screen(xl) {
-      margin-top: -220px;
+      margin-top: -80px;
       margin-bottom: 120px;
     }
   }

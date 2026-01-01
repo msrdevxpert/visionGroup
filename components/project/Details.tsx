@@ -30,7 +30,7 @@ console.log(type);
   useEffect(() => {
     if (!id) return;
 
-    fetch(`https://visiongreen-production.up.railway.app/api/v1/unified/project?id=${id}`)
+    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/unified/project?id=${id}`)
       .then((res) => res.json())
       .then((res) => {
         setProject(res?.data || null);

@@ -14,7 +14,7 @@ const Footer = () => {
 
     try {
       const res = await fetch(
-        "https://visiongreen-production.up.railway.app/api/v1/newsletter/subscribe",
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/newsletter/subscribe`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -91,7 +91,7 @@ const Footer = () => {
                 </ul>
               </div>
             </div>
-            <div className="col-md-8 col-xl-9">
+            <div className="col-md-6 col-xl-7">
               <div className="navigate-part">
                  <div className="top">
         <div className="row">
@@ -191,8 +191,9 @@ const Footer = () => {
                             <i className="ti ti-phone-call"></i>
                           </div>
                           <div className="d-flex flex-column gap-1">
-                            <a href="tel:(808)555-0111">(808) 555-0111,</a>
-                            <a href="tel:(808)555-0111">(302) 555-0107</a>
+                             <a href="tel:(+91)7601955124" >
+                        (+91) 7601955124,
+                      </a>
                           </div>
                         </li>
                         <li className="contact-item">
@@ -200,8 +201,9 @@ const Footer = () => {
                             <i className="ti ti-mail"></i>
                           </div>
                           <div className="d-flex flex-column gap-1">
-                            <a href="mailto:info@example.com">info@example.com,</a>
-                            <a href="mailto:info@example.com">info@example.com</a>
+                            <a href="mailto:http://www.corporate@grouprkr.co.in" >
+                        http://www.corporate@grouprkr.co.in
+                      </a>
                           </div>
                         </li>
                         <li className="contact-item">
@@ -209,8 +211,7 @@ const Footer = () => {
                             <i className="ti ti-map-pin-search"></i>
                           </div>
                           <div className="d-flex flex-column gap-1">
-                            <p>3605 Parker Rd.</p>
-                            <p>3890 Poplar Dr.</p>
+                             <p className="">163-C,DDA FLATS,SHAHPUR JAT,NEW DELHI- 110049</p>
                           </div>
                         </li>
                       </ul>
