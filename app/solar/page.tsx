@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 import Partners from "@/components/home1/Partners";
 import Banner from "@/components/home2/Banner";
 import BestSolar from "@/components/home2/BestSolar";
