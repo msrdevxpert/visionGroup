@@ -10,7 +10,7 @@ import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 const BrandSlider = () => {
   return (
-    <div className="brand-slider overflow-x-hidden">
+    <div className="brand-slider overflow-x-hidden mb-5">
       <div className="container-fluid">
         <div className="row g-4 align-items-center">
           <div className="col-lg-5 left-col">

@@ -67,7 +67,7 @@ const Footer = () => {
                 <a href="#">
                   <Image src={LogoBlack} className="img-fluid mb-4" alt="" />
                 </a>
-                <p className="mb-4 pb-lg-3 text-n500">Welcome to Solarox, where legal expertise meets personalized service. We are a team of highly skilled attorneys dedicated to providing</p>
+                <p className="mb-4 pb-lg-3 text-n500">Welcome to Vision Group — delivering innovative, reliable solutions across solar, civil, and tech services with professionalism, integrity, and customer-focused excellence.</p>
                 <ul className="social-link two">
                   <li>
                     <a href="#">
