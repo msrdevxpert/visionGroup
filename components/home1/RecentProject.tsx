@@ -58,7 +58,7 @@ const RecentProject = () => {
                 {loading && <p className="text-white">Loading projects...</p>}
 
                 <div className="d-flex flex-column gap-4 mt-3 mb-4 pb-lg-3">
-                  {projects.slice(0, 3).map((project) => (
+                  {projects.slice(0, 2).map((project) => (
                     <Link
                       key={project.id}
                       href={`/project-details/${project.id}`}

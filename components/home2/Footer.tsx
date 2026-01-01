@@ -1,6 +1,7 @@
 "use client";
 
 import LogoBlack from "@/public/images/visionGroupLogo.png";
+import Xlogo from "@/public/images/X Logo.png";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -91,7 +92,7 @@ const Footer = () => {
                 </ul>
               </div>
             </div>
-            <div className="col-md-6 col-xl-7">
+            <div className="col-md-8 col-xl-9">
               <div className="navigate-part">
                  <div className="top">
         <div className="row">
@@ -122,7 +123,7 @@ const Footer = () => {
         </div>
       </div>
                 <div className="row g-3 g-lg-0">
-                  <div className="col-sm-6 col-xl-3 fade_up_anim">
+                  <div className="col-sm-6 col-xl-2 fade_up_anim">
                     <h4 className="mb-4 text-n500">Quick Link</h4>
                     <ul className="navigation-links">
                       <li>
@@ -142,7 +143,7 @@ const Footer = () => {
                       </li>
                     </ul>
                   </div>
-                  <div className="col-sm-6 col-xl-3 fade_up_anim" data-delay=".2">
+                  <div className="col-sm-6 col-xl-2 fade_up_anim" data-delay=".2">
                     <h4 className="mb-4 text-n500">Pages</h4>
                     <ul className="navigation-links">
                       <li>
@@ -162,7 +163,7 @@ const Footer = () => {
                       </li>
                     </ul>
                   </div>
-                  <div className="col-sm-6 col-xl-3 fade_up_anim" data-delay=".4">
+                  <div className="col-sm-6 col-xl-2 fade_up_anim" data-delay=".4">
                     <h4 className="mb-4 text-n500">Shop</h4>
                     <ul className="navigation-links">
                       <li>
@@ -201,8 +202,8 @@ const Footer = () => {
                             <i className="ti ti-mail"></i>
                           </div>
                           <div className="d-flex flex-column gap-1">
-                            <a href="mailto:http://www.corporate@grouprkr.co.in" >
-                        http://www.corporate@grouprkr.co.in
+                            <a href="mailto:info@groupvision.co.in" >
+                        info@groupvision.co.in
                       </a>
                           </div>
                         </li>
@@ -211,7 +212,7 @@ const Footer = () => {
                             <i className="ti ti-map-pin-search"></i>
                           </div>
                           <div className="d-flex flex-column gap-1">
-                             <p className="">163-C,DDA FLATS,SHAHPUR JAT,NEW DELHI- 110049</p>
+                             <p className="">Plot No. 676/3326, 4th Floor, South Side, Mouza-Lingipur, <br/> Sisupalgarh, Khorda, Lingaraj, Odisha, India, 751 002</p>
                           </div>
                         </li>
                       </ul>
@@ -230,7 +231,9 @@ const Footer = () => {
               All rights reserved.
             </p>
             <ul className="list-unstyled d-flex flex-wrap align-items-center mb-0 ps-0 gap-2">
-              <li>
+                                <li><span className="text-white d-flex">Designed & Developed by  <Image src={Xlogo||"gr"} alt="MSR devXpert" className="ms-2 msrLogo"  /><a href="https://www.msrdevxpert.com/" target="_blank" rel="noopener noreferrer" className="text-white">MSR devXpert</a></span></li>
+
+              {/* <li>
                 <a href="#">Privacy Policy</a>
               </li>
               <li className="text-sm d-none d-sm-block">
@@ -238,7 +241,7 @@ const Footer = () => {
               </li>
               <li>
                 <a href="#">Terms of Service</a>
-              </li>
+              </li> */}
             </ul>
           </div>
         </div>

@@ -1,5 +1,6 @@
 "use client";
 import logo from "@/public/images/visionGroupLogo.png";
+import Xlogo from "@/public/images/X Logo.png";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -196,10 +197,12 @@ const Footer = () => {
             <div className="col-12">
               <div className="footer-card d-flex flex-wrap gap-3 align-items-center justify-content-between px-3">
                 <p className="text-white">
-                  Copyright © <a href="#">VisionGroup</a> All rights reserved.
+                  Copyright © <a href="www.visionoriginn.com">VisionGroup</a> All rights reserved.
                 </p>
                 <ul className="list-unstyled d-flex flex-wrap align-items-center mb-0 ps-0 gap-2">
-                  <li>
+                                   <li><span className="text-white d-flex">Designed & Developed by  <Image src={Xlogo||"MSR DevXpert"} alt="MSR devXpert" className="ms-2 msrLogo"  />&nbsp;&nbsp;<a href="https://www.msrdevxpert.com/" target="_blank" rel="noopener noreferrer" className="text-white">MSR devXpert</a></span></li>
+
+                  {/* <li>
                     <a href="#" className="text-white">
                       Privacy Policy
                     </a>
@@ -211,7 +214,7 @@ const Footer = () => {
                     <a href="#" className="text-white">
                       Terms of Service
                     </a>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
             </div>

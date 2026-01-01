@@ -1045,3 +1045,20 @@
   display: block;
   margin-inline: auto;
 }
+.msrLogo {
+  width: 3%;
+  height: 3%;
+  
+}
+@media (max-width: 768px) {
+  .msrLogo {
+    width: 4%;
+    height: 4%;
+  }
+}
+@media (max-width: 460px) {
+  .msrLogo {
+    width: 5%;
+    height: 5%;
+  }
+}

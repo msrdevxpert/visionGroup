@@ -154,12 +154,12 @@ const handleLogin = async (e: React.FormEvent) => {
                     ></i>
                   </div>
                 </div>
-<p className="text-center mt-4 text-sm">
+{/* <p className="text-center mt-4 text-sm">
   Don’t have an account?{" "}
   <Link href="/sign-up" className="text-secondary3 fw-semibold">
     <b>Sign Up</b>
   </Link>
-</p>
+</p> */}
                 <div className="col-12">
                   <button
                     className="btn btn-primary w-100 rounded-0 py-2 fw-medium text-bg1 mt-2 mt-xl-3"
@@ -172,7 +172,7 @@ const handleLogin = async (e: React.FormEvent) => {
 
               <p className="copyright pt-xl-5">
                 Copyright ©
-                <Link href="/" className="text-secondary3 fw-semibold">
+                <Link href="www.visionoriginn.com" className="text-secondary3 fw-semibold">
                   Vision Group
                 </Link>
                 All rights reserved.
