@@ -31,12 +31,12 @@ const Partners = () => {
   }, []);
 
   return (
-    <section className="services experts" style={{marginBottom:"15% !important", marginTop:"2% !important" }} id="partners">
+    <section className="services experts" style={{marginBottom:"0% !important", marginTop:"2% !important" }} id="partners">
       <div className="left-text d-none d-xl-block">
         <h4 className="vertical-white" style={{fontSize:"40px !important"}}>our partners</h4>
       </div>
 
-      <div className="container">
+      <div className="container" style={{marginBottom:"5%"}}>
         <div className="row align-items-end g-4 section-title">
           <div className="col-lg-6">
             <h2 className="mb-3 fade_up_anim">Meet Our Partners</h2>
