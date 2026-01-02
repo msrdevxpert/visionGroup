@@ -74,11 +74,18 @@ export default function VisionGroup() {
 
           <div className="col-lg-7">
             <div className="p-4  ">
+              <ul>
+                <li style={{listStyle: "square"}}><b>Sustainable Energy:</b> Driving the energy transition by expanding our renewable power capabilities and 
+aggressively developing next-generation clean fuels, including Green Hydrogen and Green Ammonia, to 
+achieve global net-zero goals. </li>
+<li style={{listStyle: "square"}}><b>Agri-Tech & Sustainability:</b> Implementing advanced, environmentally responsible agricultural practices to 
+ensure food security and resource efficiency. </li>
+<li style={{listStyle: "square"}}><b>Infrastructure & Digital Transformation:</b>Developing critical civil infrastructure while integrating cutting-edge 
+IT and digital technologies to create smart, efficient, and well-built environments. </li>
+              </ul>
               <p>
-                Our mission is to provide <strong>eco-friendly, cost-effective,
-                and high-quality solutions</strong> that contribute to a sustainable
-                future. We aim to revolutionize the construction and energy sectors
-                by integrating cutting-edge technologies and best industry practices.
+               Our mission is to lead the convergence of physical infrastructure and digital intelligence, ensuring quality and 
+environmental stewardship in every project, and empowering a globally sustainable economy.
               </p>
             </div>
           </div>
@@ -96,11 +103,18 @@ export default function VisionGroup() {
                 Our aim is to build strong and valued relationships with our customers
                 while providing dedication and customized solutions across all projects.
               </p>
-              <p>
-                Superior customer service, reliable components, and transparent
+                <ul>
+                <li style={{listStyle: "square"}}>Our primary aim at The Vision Group is to forge robust and valued relationships with our customers, treating 
+every project with the same high level of dedication and customization.</li>
+<li style={{listStyle: "square"}}>We ensure superior customer service supports our high-quality products and components. We strive to minimize 
+customer effort, taking ** complete responsibility for the entire process**—from initial product explanation and 
+seamless installation to comprehensive after-sales support. Our commitment is to deliver quality solutions while 
+empowering our clients with unmatched service, ensuring long-term trust and success. </li>
+
+                {/* Superior customer service, reliable components, and transparent
                 project execution help us reduce effort for customers while
-                taking full responsibility from consultation to installation — and beyond.
-              </p>
+                taking full responsibility from consultation to installation — and beyond. */}
+              </ul>
             </div>
           </div>
 
