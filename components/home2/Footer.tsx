@@ -231,7 +231,7 @@ const Footer = () => {
               All rights reserved.
             </p>
             <ul className="list-unstyled d-flex flex-wrap align-items-center mb-0 ps-0 gap-2">
-                                <li><span className="text-white d-flex">Designed & Developed by  <Image src={Xlogo||"gr"} alt="MSR devXpert" className="ms-2 msrLogo"  /><a href="https://www.msrdevxpert.com/" target="_blank" rel="noopener noreferrer" className="text-white">MSR devXpert</a></span></li>
+                                <li><span className=" d-flex">Designed & Developed by  <Image src={Xlogo||"gr"} alt="MSR devXpert" className="ms-2 msrLogo"  /><a href="https://www.msrdevxpert.com/" target="_blank" rel="noopener noreferrer" className="">MSR devXpert</a></span></li>
 
               {/* <li>
                 <a href="#">Privacy Policy</a>
