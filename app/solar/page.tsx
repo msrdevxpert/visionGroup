@@ -16,16 +16,35 @@ export const metadata = {
   title: "VISIONSMART OLUS ENERGY PRIVATE LIMITED | Renewable & Solar Energy Solutions",
   description:
     "VISIONSMART OLUS ENERGY PRIVATE LIMITED provides reliable renewable and solar energy solutions, empowering homes, businesses, and industries with sustainable power.",
-  keywords: [
-    "VISIONSMART OLUS ENERGY PRIVATE LIMITED",
-    "Vision Originn",
-    "solar energy",
-    "renewable energy",
-    "solar installation",
-    "green energy",
-    "solar power systems",
-    "solar company"
-  ],
+ keywords: [
+  "VISIONSMART OLUS ENERGY PRIVATE LIMITED",
+  "Vision Originn",
+  "solar energy",
+  "renewable energy",
+  "solar installation",
+  "green energy",
+  "solar power systems",
+  "solar company",
+
+  // Added — high-intent SEO keywords
+  "solar panel installation",
+  "solar panel installers near me",
+  "residential solar installation",
+  "commercial solar installation",
+  "rooftop solar panels",
+  "home solar system installation",
+  "best solar company near me",
+  "solar panel installation cost",
+  "solar energy company",
+  "solar system price",
+  "on grid solar system",
+  "off grid solar system",
+  "hybrid solar system",
+  "solar inverter installation",
+  "solar battery installation",
+  "solar EPC company"
+]
+,
   openGraph: {
     title: "VISIONSMART OLUS ENERGY PRIVATE LIMITED",
     description:

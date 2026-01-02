@@ -22,10 +22,13 @@ export const metadata: Metadata = {
     "infrastructure development",
     "green energy",
     "sustainability",
-    "Vision Originn"
+    "Vision group",
+    "civil construction",
+    "smart farming",
+    "eco-friendly solutions"
   ],
   openGraph: {
-    title: "Vision Group — Building a Sustainable Future",
+    title: "Vision originn — Building a Sustainable Future",
     description:
       "We provide innovative renewable energy, agriculture, and infrastructure solutions focused on sustainability and performance.",
     type: "website"

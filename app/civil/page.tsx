@@ -17,14 +17,28 @@ export const metadata = {
   description:
     "VISIONPLUS INFRATEC PRIVATE LIMITED, a subsidiary of Vision Originn, delivers innovative civil engineering, infrastructure, and construction solutions with quality, safety, and sustainability.",
   keywords: [
-    "VISIONPLUS INFRATEC PRIVATE LIMITED",
-    "Vision Originn",
-    "civil construction company",
-    "infrastructure development",
-    "engineering company",
-    "road and building construction",
-    "industrial infrastructure services"
-  ],
+  "VISIONPLUS INFRATEC PRIVATE LIMITED",
+  "Vision Originn",
+  "civil construction company",
+  "infrastructure development",
+  "engineering company",
+  "road and building construction",
+  "industrial infrastructure services",
+
+  // added SEO boosters
+  "building construction company",
+  "civil engineering services",
+  "house construction services",
+  "commercial construction company",
+  "industrial construction company",
+  "turnkey construction services",
+  "civil contractor",
+  "construction company near me",
+  "best civil construction company",
+  "infrastructure company",
+  "structural engineering services"
+]
+,
   openGraph: {
     title:
       "VISIONPLUS INFRATEC PRIVATE LIMITED — A Vision Originn Company",

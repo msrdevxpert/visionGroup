@@ -47,6 +47,13 @@
       color: $bg2 !important;
     }
   }
+  &.numberborder {
+    color: #10261c !important;
+    border-color: #10261c;
+    &:hover {
+      color: $bg2 !important;
+    }
+  }
 }
 
 .primary-btn {
