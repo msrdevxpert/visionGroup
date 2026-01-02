@@ -87,14 +87,14 @@ const Clients = () => {
         >
           {clientCards.map((client, index) => (
             <SwiperSlide key={index}>
-              <a href={client.link} target="_blank" rel="noopener noreferrer">
+              {/* <a href={client.link} target="_blank" rel="noopener noreferrer"> */}
                 <img
   src={client.image.src}
   alt="Client Logo"
   className="client-logo"
 />
 
-              </a>
+              {/* </a> */}
             </SwiperSlide>
           ))}
         </Swiper>
