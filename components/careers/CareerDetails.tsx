@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useParams, useRouter, usePathname } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 type Career = {
   id: string;
@@ -12,11 +12,12 @@ type Career = {
   description: string;
   createdAt: string;
 };
+
 type CareerDetailsProps = {
   careerId: string;
 };
-const CareerDetails = ({ careerId }: CareerDetailsProps)  => {
-  const { id } = useParams();
+
+const CareerDetails = ({ careerId }: CareerDetailsProps) => {
   const router = useRouter();
   const pathname = usePathname();
 
@@ -24,7 +25,7 @@ const CareerDetails = ({ careerId }: CareerDetailsProps)  => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!id) return;
+    if (!careerId) return;
 
     fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/careers/${careerId}`)
       .then((res) => res.json())
@@ -33,21 +34,15 @@ const CareerDetails = ({ careerId }: CareerDetailsProps)  => {
         setLoading(false);
       })
       .catch(() => setLoading(false));
-  }, [id]);
+  }, [careerId]);
 
-const handleApplyNow = () => {
-  const segments = pathname.split("/").filter(Boolean);
+  const handleApplyNow = () => {
+    const segments = pathname.split("/").filter(Boolean);
+    const filtered = segments.filter((seg) => seg !== "careers");
+    const base = filtered.length > 1 ? `/${filtered[0]}` : "";
 
-  // "careers" বাদ দাও
-  const filtered = segments.filter(seg => seg !== "careers");
-
-  // base route determine
-  const base =
-    filtered.length > 1 ? `/${filtered[0]}` : "";
-
-  router.push(`${base}/applyNow?id=${id}`);
-};
-
+    router.push(`${base}/applyNow?id=${careerId}`);
+  };
 
   if (loading) return <p className="text-center pt-120">Loading...</p>;
   if (!career) return <p className="text-center pt-120">No job found</p>;
@@ -56,7 +51,6 @@ const handleApplyNow = () => {
     <section className="pt-120 pb-120">
       <div className="container">
         <div className="bg-white p-4 p-lg-5 rounded shadow-sm">
-
           <span className="text-sm text-muted">
             Posted on{" "}
             {new Date(career.createdAt).toLocaleDateString("en-GB")}
@@ -79,14 +73,12 @@ const handleApplyNow = () => {
             </p>
           </div>
 
-          {/* ✅ APPLY NOW BUTTON */}
           <button
             onClick={handleApplyNow}
             className="primary-btn mt-4 d-inline-flex align-items-center gap-2"
           >
             Apply Now <i className="ti ti-arrow-up-right"></i>
           </button>
-
         </div>
       </div>
     </section>

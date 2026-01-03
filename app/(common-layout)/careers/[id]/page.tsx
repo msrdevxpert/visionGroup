@@ -1,9 +1,9 @@
-// app/(common-layout)/careers/[id]/page.tsx
-
 import CareerDetails from "@/components/careers/CareerDetails";
 import Banner from "@/components/shared/Banner";
 import BrandSlider from "@/components/shared/BrandSlider";
 import Navbar from "@/components/shared/Navbar";
+
+export const dynamicParams = true;
 
 // Generate static paths for SSG
 export async function generateStaticParams() {
@@ -17,7 +17,6 @@ export async function generateStaticParams() {
   }));
 }
 
-// Page component: async, params inferred by Next
 const CareerDetailsPage = async ({ params }: any) => {
   return (
     <>
