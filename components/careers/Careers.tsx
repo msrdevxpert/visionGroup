@@ -32,7 +32,7 @@ const Careers = () => {
 const pathname = usePathname();
 
 const buildCareerLink = (id: any) => {
-  console.log(id);
+  console.log("35",id);
   
   const segments = pathname.split("/").filter(Boolean);
   const cleaned = segments.filter(seg => seg !== "careers");

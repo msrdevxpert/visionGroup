@@ -14,7 +14,7 @@ type Career = {
 };
 
 type CareerDetailsProps = {
-  careerId?: string;
+  careerId?: any;
 };
 
 const CareerDetails = ({ careerId }: CareerDetailsProps) => {

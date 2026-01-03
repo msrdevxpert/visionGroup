@@ -18,6 +18,8 @@ export const dynamicParams = true;
 // }
 
 const CareerDetailsPage = async ({ params }: any) => {
+  console.log(params);
+  
   return (
     <>
       <Navbar />
