@@ -92,7 +92,7 @@ const SolarInstall = () => {
         alt={story.title}
         width={800}
         height={500}
-        className="img-fluid"
+        className="img-fluidd"
       />
 
       <div className="success-info">
