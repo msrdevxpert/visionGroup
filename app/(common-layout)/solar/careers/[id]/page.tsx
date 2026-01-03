@@ -3,26 +3,44 @@ import Banner from "@/components/shared/Banner";
 import BrandSlider from "@/components/shared/BrandSlider";
 import Navbar from "@/components/home2/Navbar";
 
-type CareerPageProps = {
-  params: {
-    id: string;
-  };
-};
+export const dynamicParams = true; // allow new ids after build
 
-// ✅ Generate static params for SSG
 export async function generateStaticParams() {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/careers`
-  );
-  const careers = await res.json();
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/careers`,
+      {
+        // ensure build uses fresh data
+        cache: "no-store",
+      }
+    );
 
-  return careers.data.map((career: any) => ({
-    id: career.id.toString(),
-  }));
+    if (!res.ok) {
+      console.log("❌ Careers fetch failed:", res.status);
+      return [];
+    }
+
+    const careers = await res.json();
+
+    if (!careers?.data) {
+      console.log("❌ Careers response invalid");
+      return [];
+    }
+
+    return careers.data.map((career: any) => ({
+      id: career.id.toString(),
+    }));
+  } catch (err) {
+    console.log("❌ Careers fetch error:", err);
+    return [];
+  }
 }
 
-// ✅ Mark component as async to satisfy PageProps constraint
-const CareerDetailsPage = async ({ params }: any) => {
+export default async function CareerDetailsPage({
+  params,
+}: {
+  params: { id: string };
+}) {
   return (
     <>
       <Navbar />
@@ -31,6 +49,4 @@ const CareerDetailsPage = async ({ params }: any) => {
       <BrandSlider />
     </>
   );
-};
-
-export default CareerDetailsPage;
+}
