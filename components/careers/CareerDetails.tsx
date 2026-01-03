@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 type Career = {
   id: string;
@@ -14,39 +14,46 @@ type Career = {
 };
 
 type CareerDetailsProps = {
-  careerId: string;
+  careerId?: string;
 };
 
 const CareerDetails = ({ careerId }: CareerDetailsProps) => {
-  console.log(careerId);
-  
   const router = useRouter();
-  const pathname = usePathname();
 
   const [career, setCareer] = useState<Career | null>(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    if (!careerId) return;
+  // 🔥 DEBUG — see what Netlify receives
+  console.log("Career ID from page =>", careerId);
 
-    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/careers/${careerId}`)
-      .then((res) => res.json())
-      .then((res) => {
-        setCareer(res.data);
+  useEffect(() => {
+    if (!careerId) {
+      setLoading(false);
+      return;
+    }
+
+    (async () => {
+      try {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/careers/${careerId}`
+        );
+        const json = await res.json();
+        setCareer(json.data || null);
+      } catch (e) {
+        setCareer(null);
+      } finally {
         setLoading(false);
-      })
-      .catch(() => setLoading(false));
+      }
+    })();
   }, [careerId]);
 
   const handleApplyNow = () => {
-    const segments = pathname.split("/").filter(Boolean);
-    const filtered = segments.filter((seg) => seg !== "careers");
-    const base = filtered.length > 1 ? `/${filtered[0]}` : "";
-
-    router.push(`${base}/applyNow?id=${careerId}`);
+    if (!careerId) return;
+    router.push(`/applyNow?id=${careerId}`);
   };
 
   if (loading) return <p className="text-center pt-120">Loading...</p>;
+  if (!careerId) return <p className="text-center pt-120">Invalid URL</p>;
   if (!career) return <p className="text-center pt-120">No job found</p>;
 
   return (
@@ -71,7 +78,7 @@ const CareerDetails = ({ careerId }: CareerDetailsProps) => {
             </p>
             <p className="mb-0">
               <strong>Job Type:</strong>{" "}
-              {career.jobType.replace("_", " ")}
+              {career.jobType?.replace("_", " ")}
             </p>
           </div>
 
