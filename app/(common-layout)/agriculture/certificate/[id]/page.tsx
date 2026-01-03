@@ -37,7 +37,7 @@ export default function CertificationDetailsPage(props: any) {
         bgImage="CertificateDetailsBanner.jpg"
       />
 
-      <Details certificateId={params.id} />
+      <Details  />
 
       <BrandSlider />
     </>

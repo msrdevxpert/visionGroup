@@ -39,7 +39,7 @@ const Details = ({ type = "main" }: { type?: string }) => {
 
   /* ================= MORE NEWS ================= */
   useEffect(() => {
-    fetch(`https://visiongreen-production.up.railway.app/api/v1/blog`)
+    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/blog`)
       .then((res) => res.json())
       .then((res) => {
         const blogs: Blog[] = res?.data || [];

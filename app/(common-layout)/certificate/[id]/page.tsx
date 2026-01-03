@@ -35,7 +35,7 @@ export default function CertificationDetailsPage(
         title="Certification Details"
         bgImage="CertificateDetailsBanner.jpg"
       />
-      <Details certificateId={params.id} />
+      <Details  />
       <BrandSlider />
     </>
   );

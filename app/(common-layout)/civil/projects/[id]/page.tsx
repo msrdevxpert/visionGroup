@@ -23,7 +23,7 @@ const url = "/images/CivilProject.mp4";
       <Banner title="Project Details" bgImage="CivilProjectBanner.jpg" />
 
       {/* ✅ pass id */}
-      <Details id={id} type="civil" url={url}/>
+      <Details  type="civil" url={url}/>
 
       <BrandSlider />
     </>

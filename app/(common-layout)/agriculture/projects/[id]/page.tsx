@@ -24,7 +24,7 @@ const url = "/images/ProjectForAgri.mp4";
       <Banner title="Project Details" bgImage="AgriProjectIdBanner.jpg" />
 
       {/* ✅ pass id */}
-      <Details id={id} type="agri" url={url}/>
+      <Details  type="agri" url={url}/>
 
       <BrandSlider />
     </>

@@ -4,11 +4,11 @@ import BrandSlider from "@/components/shared/BrandSlider";
 import services from "@/public/data/services";
 import Navbar from "@/components/shared/Navbar";
 
-export async function generateStaticParams() {
-  return services.map(({ id }) => ({
-    id: id.toString(),
-  }));
-}
+// export async function generateStaticParams() {
+//   return services.map(({ id }) => ({
+//     id: id.toString(),
+//   }));
+// }
 
 export default async function Page({
   params,

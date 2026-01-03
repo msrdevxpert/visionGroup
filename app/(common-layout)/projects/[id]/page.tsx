@@ -31,7 +31,7 @@ export default function ProjectDetailsPage(props: any) {
       <Navbar />
       <Banner title="Project Details" bgImage="VisonGroupProjectIdBanner.jpg" />
 
-      <Details id={params.id} type="main" url={url} />
+      <Details  type="main" url={url} />
 
       <BrandSlider />
     </>

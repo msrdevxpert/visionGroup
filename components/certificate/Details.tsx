@@ -12,11 +12,7 @@ type Certification = {
   createdAt: string;
 };
 
-export default function CertificationDetails({
-  certificateId,
-}: {
-  certificateId: string;
-}) {
+export default function CertificationDetails() {
   const params = useParams();
   const id = params?.id as string;
   const [cert, setCert] = useState<Certification | null>(null);
@@ -26,7 +22,7 @@ export default function CertificationDetails({
     if (!id) return;
 
     fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/certifications/${certificateId}`
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/certifications/${id}`
     )
       .then((res) => res.json())
       .then((res) => {

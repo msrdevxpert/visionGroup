@@ -1,4 +1,5 @@
 "use client";
+import { useParams } from "next/navigation";
 import projectDetailsVideo from "@/public/images/project-details-video.webp";
 import Image from "next/image";
 import Link from "next/link";
@@ -19,13 +20,15 @@ type Project = {
   createdAt: string;
 };
 
-const Details = ({ id, type, url }: { id: string; type: string, url:string }) => {
+const Details = ({ type, url }: { type: string; url: string }) => {
   const [open, setOpen] = useState(false);
   const [project, setProject] = useState<Project | null>(null);
   const [moreProjects, setMoreProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
 console.log(type);
+ const params = useParams<{ id: string }>();
 
+  const id = params?.id;
   // 🔹 Main project
   useEffect(() => {
     if (!id) return;
@@ -41,7 +44,7 @@ console.log(type);
 
   // 🔹 More projects
   useEffect(() => {
-    let url = "https://visiongreen-production.up.railway.app/api/v1/unified/projects";
+    let url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/unified/projects`;
 
     if (type && type !== "main") {
       url += `?type=${type}`;
