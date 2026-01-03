@@ -18,6 +18,8 @@ type CareerDetailsProps = {
 };
 
 const CareerDetails = ({ careerId }: CareerDetailsProps) => {
+  console.log(careerId);
+  
   const router = useRouter();
   const pathname = usePathname();
 
