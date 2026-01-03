@@ -187,7 +187,7 @@ console.log(type);
       <CommonModal
   open={open}
   onClose={() => setOpen(false)}
-  videoId="LTsxOzNdbRQ"
+  videoId=""
   local={type === "agri" ? "Y" : "N"}
   url={type !== "main" ? url : ""} // ✅ pass string directly
 />

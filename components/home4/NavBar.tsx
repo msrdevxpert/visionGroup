@@ -246,7 +246,7 @@ const navbarData = [
             <ul className="mb-0 menu p-0 py-xxl-2 align-items-lg-center">
               <li className="d-none d-lg-block px-xxl-4">
                 <a className="align-items-center gap-2 d-none d-xl-flex outline-btn primary" href="tel:3165550116">
-                  <i className="ti ti-phone-call fs-4"></i>(316) 555-0116
+                  <i className="ti ti-phone-call fs-4"></i>(+91) 7601955124
                 </a>
               </li>
               {navbarData.slice(0, 3).map(({ id, title, link, submenus, type }) =>

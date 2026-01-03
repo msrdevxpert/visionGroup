@@ -248,7 +248,7 @@ console.log("path",cleanedPath);
               {/* VISIONSMART PLUS ENERGY PRIVATE LIMITED */}
             </Link>
             <a className="align-items-center gap-2 d-none d-xl-flex outline-btn primary" href="tel:3165550116">
-              <i className="ti ti-phone-call fs-4"></i>(316) 555-0116
+              <i className="ti ti-phone-call fs-4"></i>(+91) 7601955124
             </a>
             <ul className="mb-0 menu align-items-lg-center">
               {navbarData.slice(0, 3).map(
