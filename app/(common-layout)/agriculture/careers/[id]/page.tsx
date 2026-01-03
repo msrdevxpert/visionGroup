@@ -5,16 +5,16 @@ import BrandSlider from "@/components/shared/BrandSlider";
 import Navbar from "@/components/home4/NavBar";
 
 // Generate static params for SSG
-export async function generateStaticParams() {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/careers`
-  );
-  const careers = await res.json();
+// export async function generateStaticParams() {
+//   const res = await fetch(
+//     `${process.env.NEXT_PUBLIC_API_BASE_URL}/careers`
+//   );
+//   const careers = await res.json();
 
-  return careers.data.map((career: any) => ({
-    id: career.id.toString(),
-  }));
-}
+//   return careers.data.map((career: any) => ({
+//     id: career.id.toString(),
+//   }));
+// }
 
 // ✅ No explicit type annotation for props
 const CareerDetailsPage = async ({ params }:any) => {
@@ -22,7 +22,7 @@ const CareerDetailsPage = async ({ params }:any) => {
     <>
       <Navbar />
       <Banner title="Career Details" bgImage="CertificateDetailsBanner.jpg" />
-      <CareerDetails careerId={params.id} />
+      <CareerDetails  />
       <BrandSlider />
     </>
   );
