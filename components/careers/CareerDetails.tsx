@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
 type Career = {
   id: string;
@@ -17,9 +17,12 @@ type CareerDetailsProps = {
   careerId?: string;
 };
 
-const CareerDetails = ({ careerId }: CareerDetailsProps) => {
+const CareerDetails = () => {
   const router = useRouter();
 
+  const params = useParams<{ id: string }>();
+
+  const careerId = params?.id;
   const [career, setCareer] = useState<Career | null>(null);
   const [loading, setLoading] = useState(true);
 

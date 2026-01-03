@@ -45,7 +45,7 @@ export default async function CareerDetailsPage({
     <>
       <Navbar />
       <Banner title="Career Details" bgImage="CertificateDetailsBanner.jpg" />
-      <CareerDetails careerId={params.id} />
+      <CareerDetails  />
       <BrandSlider />
     </>
   );
