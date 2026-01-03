@@ -5,21 +5,27 @@ import Navbar from "@/components/shared/Navbar";
 
 export const dynamicParams = true;
 
-// Generate static paths for SSG
-// export async function generateStaticParams() {
-//   const res = await fetch(
-//     `${process.env.NEXT_PUBLIC_API_BASE_URL}/careers`
-//   );
-//   const careers = await res.json();
+// 👉 Generate static paths (like services)
+export async function generateStaticParams() {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/careers`,
+      { cache: "no-store" }
+    );
 
-//   return careers.data.map((career: any) => ({
-//     id: career.id.toString(),
-//   }));
-// }
+    const careers = await res.json();
 
-const CareerDetailsPage = async ({ params }: any) => {
-  console.log(params);
-  
+    // IMPORTANT — return only ids
+    return careers.data.map((career: any) => ({
+      id: career.id.toString(),
+    }));
+  } catch (err) {
+    console.error("Error loading careers:", err);
+    return [];
+  }
+}
+
+const Page = async ({ params }: { params: { id: string } }) => {
   return (
     <>
       <Navbar />
@@ -30,4 +36,4 @@ const CareerDetailsPage = async ({ params }: any) => {
   );
 };
 
-export default CareerDetailsPage;
+export default Page;

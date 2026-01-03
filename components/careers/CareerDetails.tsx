@@ -14,7 +14,7 @@ type Career = {
 };
 
 type CareerDetailsProps = {
-  careerId?: any;
+  careerId?: string;
 };
 
 const CareerDetails = ({ careerId }: CareerDetailsProps) => {
@@ -23,28 +23,32 @@ const CareerDetails = ({ careerId }: CareerDetailsProps) => {
   const [career, setCareer] = useState<Career | null>(null);
   const [loading, setLoading] = useState(true);
 
-  // 🔥 DEBUG — see what Netlify receives
-  console.log("Career ID from page =>", careerId);
-
   useEffect(() => {
     if (!careerId) {
       setLoading(false);
       return;
     }
 
-    (async () => {
+    const loadCareer = async () => {
       try {
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL}/careers/${careerId}`
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/careers/${careerId}`,
+          { cache: "no-store" }
         );
+
+        if (!res.ok) throw new Error("Failed to fetch career");
+
         const json = await res.json();
-        setCareer(json.data || null);
-      } catch (e) {
+        setCareer(json?.data ?? null);
+      } catch (err) {
+        console.error(err);
         setCareer(null);
       } finally {
         setLoading(false);
       }
-    })();
+    };
+
+    loadCareer();
   }, [careerId]);
 
   const handleApplyNow = () => {
@@ -62,7 +66,9 @@ const CareerDetails = ({ careerId }: CareerDetailsProps) => {
         <div className="bg-white p-4 p-lg-5 rounded shadow-sm">
           <span className="text-sm text-muted">
             Posted on{" "}
-            {new Date(career.createdAt).toLocaleDateString("en-GB")}
+            {career.createdAt
+              ? new Date(career.createdAt).toLocaleDateString("en-GB")
+              : "—"}
           </span>
 
           <h2 className="mt-2">{career.title}</h2>
