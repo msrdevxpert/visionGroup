@@ -43,7 +43,7 @@ export default function Topbar({ fullName, toggleSidebar }: TopbarProps) {
     <header className="admin-topbar d-flex justify-content-between align-items-center p-3 bg-white shadow-sm">
       {/* Hamburger for mobile */}
       <button
-        className="d-md-none btn btn-outline-secondary me-2"
+        className="d-lg-none btn btn-outline-secondary me-2"
         onClick={toggleSidebar}
       >
         <Menu size={20} />
