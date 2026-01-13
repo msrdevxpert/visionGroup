@@ -25,6 +25,7 @@ export default function Sidebar({ isOpen, toggleSidebar }: SidebarProps) {
     { name: "Certifications", path: "/admin/certifications" },
     { name: "Blog", path: "/admin/blog" },
     { name: "Gallery", path: "/admin/gallery" },
+    { name: "FAQs", path: "/admin/faq" },
   ];
 
   return (

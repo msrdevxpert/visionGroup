@@ -14,10 +14,11 @@ import Client from "@/components/home1/Clients"
 import Partners from "@/components/home1/Partners";
 
 export const metadata = {
-  title: "Home | Vision Originn",
+  title: "Vision Originn",
   description: "Vision Originn provides expert services, innovative solutions, and trusted partnerships.",
   keywords: [
   "Vision Originn",
+  "Vision Origin",
   "Vision Originn India",
   "Vision Group",
   "business services",

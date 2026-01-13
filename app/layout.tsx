@@ -11,30 +11,45 @@ const interFont = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Vision Originn — Renewable Energy, Agriculture & Infrastructure",
+  title: "Vision Originn – Renewable Energy & Smart Infrastructure",
   description:
-    "Vision Originn delivers sustainable renewable energy solutions, smart agriculture technology, and reliable civil infrastructure services — building a greener and stronger future.",
+    "Vision Originn is a leading Indian company providing renewable energy, smart agriculture technology and modern civil infrastructure solutions.",
+
   keywords: [
     "Vision Originn",
-    "renewable energy",
-    "solar solutions",
-    "agriculture technology",
-    "infrastructure development",
-    "green energy",
-    "sustainability",
-    "Vision group",
-    "civil construction",
-    "smart farming",
-    "eco-friendly solutions"
+    "Vision Origin",
+    "Vision Origin company",
+    "Vision Origin solar",
+    "Vision Origin renewable",
+    "Vision Originn",
+    "Vision Originn solar",
+    "Vision Originn company",
+    "green energy India",
+    "solar EPC",
+    "smart agriculture",
+    "civil infrastructure"
   ],
-  openGraph: {
-    title: "Vision originn — Building a Sustainable Future",
-    description:
-      "We provide innovative renewable energy, agriculture, and infrastructure solutions focused on sustainability and performance.",
-    type: "website"
-  }
-};
 
+  alternates: {
+    canonical: "https://www.visionoriginn.com",
+  },
+
+  openGraph: {
+    title: "Vision Originn – Building a Sustainable Future",
+    description:
+      "Vision Originn provides solar energy, agriculture technology and infrastructure services across India.",
+    url: "https://www.visionoriginn.com",
+    siteName: "Vision Originn",
+    type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Vision Originn",
+    description:
+      "Vision Originn is a renewable energy and infrastructure company in India.",
+  },
+};
 
 export default function RootLayout({
   children,
@@ -43,9 +58,31 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${interFont.className}`}>
+      <body className={interFont.className}>
+
+        {/* 🔥 Invisible Google Brand Alias */}
+        <span style={{ display: "none" }}>
+          Vision Origin is the official brand name of Vision Originn renewable energy company
+        </span>
+
+        {/* 🔥 Google Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "Vision Originn",
+              alternateName: ["Vision Origin", "Vision Originn India"],
+              url: "https://www.visionoriginn.com",
+              logo: "https://www.visionoriginn.com/logo.png",
+              description:
+                "Vision Originn, also known as Vision Origin, is a renewable energy and infrastructure company in India.",
+            }),
+          }}
+        />
+
         <Bootstrap>
-          {/* <Loader /> */}
           <Animations />
           <GotoTop />
           {children}
